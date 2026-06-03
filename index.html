@@ -371,7 +371,7 @@ p { margin-bottom: 12px; color: var(--text2); }
   <div class="nav-item" onclick="navTo('m4')"><div class="nav-num">4</div>OS Variants</div>
   <div class="nav-item" onclick="navTo('m5')"><div class="nav-num">5</div>Process Manager</div>
   <div class="nav-item nav-quiz-item" style="margin-top:12px;border-top:1px solid var(--border);padding-top:12px" onclick="navTo('quiz')">
-    <div class="nav-num" style="background:rgba(245,166,35,0.15);color:var(--amber)">✦</div>50-Item Quiz
+    <div class="nav-num" style="background:rgba(245,166,35,0.15);color:var(--amber)">✦</div>60-Item Quiz
   </div>
   <div class="sidebar-footer" style="margin-top:24px">Midterm Reviewer</div>
 </nav>
@@ -390,7 +390,7 @@ p { margin-bottom: 12px; color: var(--text2); }
       <div class="nav-item" onclick="showPage('m4')"><div class="nav-num">4</div>OS Variants</div>
       <div class="nav-item" onclick="showPage('m5')"><div class="nav-num">5</div>Process Manager</div>
       <div class="nav-item nav-quiz-item" onclick="showPage('quiz')" style="margin-top:16px">
-        <div class="nav-num" style="background:rgba(245,166,35,0.15);color:var(--amber)">✦</div>50-Item Quiz
+        <div class="nav-num" style="background:rgba(245,166,35,0.15);color:var(--amber)">✦</div>60-Item Quiz
       </div>
     </nav>
     <div class="sidebar-footer">Midterm Reviewer</div>
@@ -405,7 +405,7 @@ p { margin-bottom: 12px; color: var(--text2); }
       <p class="hero-sub">A complete reviewer covering all 5 modules from the midterm. Study each section, then challenge yourself with the 50-item quiz.</p>
       <div class="hero-grid">
         <div class="hero-card"><div class="hero-card-num">5</div><div class="hero-card-label">Modules</div></div>
-        <div class="hero-card"><div class="hero-card-num">50</div><div class="hero-card-label">Quiz Items</div></div>
+        <div class="hero-card"><div class="hero-card-num">60</div><div class="hero-card-label">Quiz Items</div></div>
         <div class="hero-card"><div class="hero-card-num">12</div><div class="hero-card-label">OS Variants</div></div>
       </div>
       <button class="start-btn" onclick="showPage('m1')">Start Reviewing →</button>
@@ -658,15 +658,15 @@ p { margin-bottom: 12px; color: var(--text2); }
 
     <!-- QUIZ -->
     <div id="page-quiz" class="page">
-      <div class="section-tag">50-Item Quiz</div>
+      <div class="section-tag">60-Item Quiz</div>
       <h2>Knowledge Check</h2>
-      <p style="color:var(--text2);margin-bottom:28px">Answer all 50 questions covering all modules. Your score is shown at the end.</p>
+      <p style="color:var(--text2);margin-bottom:28px">Answer all 60 questions covering all modules. Your score is shown at the end.</p>
 
       <div id="quiz-active">
         <div class="quiz-header">
           <div class="quiz-progress">
             <div class="progress-bar"><div class="progress-fill" id="pbar" style="width:2%"></div></div>
-            <div class="progress-label" id="plab">1 / 50</div>
+            <div class="progress-label" id="plab">1 / 60</div>
           </div>
           <div id="score-live" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)">Score: 0</div>
         </div>
@@ -691,6 +691,96 @@ p { margin-bottom: 12px; color: var(--text2); }
           <button class="retake-btn" onclick="retakeQuiz()">Retake Quiz</button>
         </div>
         <div id="review-section"></div>
+      </div>
+
+      <!-- ENUMERATION SECTION -->
+      <div id="enum-section" style="margin-top:40px">
+        <hr class="section-divider">
+        <div class="section-tag">Enumeration</div>
+        <h2>Must-Know Lists</h2>
+        <p style="color:var(--text2);margin-bottom:24px">Key enumerations and lists that commonly appear in exams.</p>
+
+        <h3>5 Functions of the OS (PM DAU)</h3>
+        <div class="steps">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>P</strong>rocessor Manager — Allocates the CPU among all processes.</div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>M</strong>emory Storage Manager — Allocates memory; prevents processes from using each other's space.</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>D</strong>evice Manager — Manages input/output devices via device drivers.</div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>A</strong>pplication Interface — Allows application programs to communicate with the OS.</div></div>
+          <div class="step-item"><div class="step-num">5</div><div class="step-content"><strong>U</strong>ser Interface — Shell (Unix) or GUI (Windows/Mac) for user interaction.</div></div>
+        </div>
+
+        <h3>5 Process States</h3>
+        <div class="steps">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>New</strong> — The process is being created.</div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>Ready</strong> — Waiting to be assigned to a processor.</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>Running</strong> — Instructions are being executed.</div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>Waiting</strong> — Waiting for an event (e.g., I/O completion).</div></div>
+          <div class="step-item"><div class="step-num">5</div><div class="step-content"><strong>Terminated</strong> — The process has finished execution.</div></div>
+        </div>
+
+        <h3>7 Components of the Process Control Block (PCB)</h3>
+        <div class="steps">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>Process ID</strong> — Unique identifier of the process.</div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>Process State</strong> — Current state (new, ready, running, waiting, terminated).</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>Process Priority</strong> — Numerical value representing urgency.</div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>Accounting Info</strong> — Resources used by the process.</div></div>
+          <div class="step-item"><div class="step-num">5</div><div class="step-content"><strong>Program Counter</strong> — Pointer to the next instruction to execute.</div></div>
+          <div class="step-item"><div class="step-num">6</div><div class="step-content"><strong>CPU Registers</strong> — Holds temporary data when an interrupt halts the process.</div></div>
+          <div class="step-item"><div class="step-num">7</div><div class="step-content"><strong>PCB Pointers</strong> — Address of the next PCB in ready state.</div></div>
+        </div>
+
+        <h3>4 Memory Allocation Techniques</h3>
+        <div class="steps">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>First Fit</strong> — Allocate the first hole big enough.</div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>Next Fit</strong> — Like First Fit but starts from the last allocated hole.</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>Best Fit</strong> — Allocate the smallest hole that is sufficient.</div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>Worst Fit</strong> — Allocate the largest available hole.</div></div>
+        </div>
+
+        <h3>5 CPU Scheduling Algorithms</h3>
+        <div class="steps">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>FCFS</strong> — First Come, First Serve. Non-preemptive; like FIFO.</div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>SJF</strong> — Shortest Job First. Non-preemptive; smallest burst time runs first.</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>SRTF</strong> — Shortest Remaining Time First. Preemptive version of SJF.</div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>Priority Scheduling</strong> — Highest-priority process runs first. Can be preemptive or non-preemptive.</div></div>
+          <div class="step-item"><div class="step-num">5</div><div class="step-content"><strong>Round Robin (RR)</strong> — Preemptive; each process gets a fixed quantum time, then cycles to the next.</div></div>
+        </div>
+
+        <h3>7 Levels of Storage Hierarchy (Top → Bottom)</h3>
+        <div class="steps">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>Registers</strong> — Fastest, smallest, most expensive. Volatile.</div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>Cache</strong> — Very fast. Volatile.</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>Main Memory (RAM)</strong> — Fast. Volatile.</div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>Electronic Disk (SSD)</strong> — Medium speed. Non-volatile.</div></div>
+          <div class="step-item"><div class="step-num">5</div><div class="step-content"><strong>Magnetic Disk</strong> — Slower. Non-volatile.</div></div>
+          <div class="step-item"><div class="step-num">6</div><div class="step-content"><strong>Optical Disk</strong> — Slow. Non-volatile.</div></div>
+          <div class="step-item"><div class="step-num">7</div><div class="step-content"><strong>Magnetic Tapes</strong> — Slowest, largest, cheapest per bit. Non-volatile.</div></div>
+        </div>
+
+        <h3>4 OS Generations</h3>
+        <div class="steps">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>1st Generation</strong> — Vacuum tubes. No OS yet. Replaced mechanical machines.</div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>2nd Generation</strong> — Transistors (replaced vacuum tubes). Had current leakage issues.</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>3rd Generation</strong> — Silicon chips / Integrated Circuits (IC). Introduced multiprogramming.</div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>4th Generation</strong> — Large-scale integration. Introduced DOS, Linux, UNIX, and Windows.</div></div>
+        </div>
+
+        <h3>4 Types of Operating Systems</h3>
+        <div class="steps">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>Real-Time OS</strong> — Controls machinery, scientific instruments, industrial systems (e.g., robotics, avionics).</div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>Multiuser OS</strong> — Multiple users simultaneously share resources (e.g., Windows Server, UNIX, Linux).</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>Single User, Single Task</strong> — One user, one task at a time (e.g., PDAs, early mobile OS).</div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>Single User, Multitask</strong> — One user, multiple tasks simultaneously (e.g., modern desktop Windows/Mac).</div></div>
+        </div>
+
+        <h3>Boot-Up Sequence (5 Steps)</h3>
+        <div class="steps">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>CPU</strong> executes the BIOS firmware stored on the motherboard.</div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>BIOS</strong> checks and inventories all hardware devices (POST).</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>BIOS</strong> locates a bootable device (hard drive, USB, etc.).</div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>Boot Sector</strong> is loaded from the bootable device into memory.</div></div>
+          <div class="step-item"><div class="step-num">5</div><div class="step-content"><strong>Kernel</strong> is loaded by the Boot Sector — the OS is now running.</div></div>
+        </div>
       </div>
     </div>
 
@@ -789,14 +879,23 @@ const questions = [
   {q:"Which process state comes right before 'Running'?", choices:["New","Terminated","Waiting","Ready"], ans:3, exp:"A process moves from Ready to Running when the scheduler dispatches it. 'Ready' means waiting for the processor."},
   {q:"The parent process is created:", choices:["After the child processes","During the initial boot process when the OS loads","By the user manually","Before BIOS executes"], ans:1, exp:"Once the initial boot is done and the OS is loaded, it creates an initial parent process. The parent then generates child processes."},
   {q:"Which PCB component serves as the unique identifier of a process?", choices:["Process Priority","Program Counter","Process ID","CPU Register"], ans:2, exp:"Process ID serves as the unique identifier of each process in the Process Control Block."},
-  {q:"Non-preemptive scheduling can be triggered by:", choices:["An I/O request causing running → waiting","An interrupt causing running → ready","A higher-priority process arriving","I/O completion causing waiting → ready"], ans:0, exp:"Non-preemptive scheduling occurs when a process switches from running to waiting — for example, as a result of an I/O request."}
+  {q:"Non-preemptive scheduling can be triggered by:", choices:["An I/O request causing running → waiting","An interrupt causing running → ready","A higher-priority process arriving","I/O completion causing waiting → ready"], ans:0, exp:"Non-preemptive scheduling occurs when a process switches from running to waiting — for example, as a result of an I/O request."},
+  {q:"Which type of OS is designed to control robotics and avionics?", choices:["Multiuser OS","Batch OS","Real-Time OS","Single User, Single Task"], ans:2, exp:"Real-Time OS is used for medical devices, robotics, and avionics — systems that require immediate processing."},
+  {q:"What does BIOS stand for?", choices:["Boot Input Operating System","Basic Input/Output System","Binary Integrated OS Software","Base Instruction Output Structure"], ans:1, exp:"BIOS = Basic Input/Output System. It is pre-installed, low-level firmware stored on the motherboard."},
+  {q:"Which OS is the foundation that Linux, Mac OS, and Solaris are all based on?", choices:["Windows NT","BSD","UNIX","Fedora Core"], ans:2, exp:"UNIX, created by Ken Thompson and Dennis Ritchie at AT&T, is the foundational OS that Linux, Mac OS, and Solaris are based on."},
+  {q:"Debian OS was named after its creator Ian Murdock and his wife. What is her name?", choices:["Diana","Debra","Donna","Delia"], ans:1, exp:"Debian = Ian + Debra (his wife). Ian Murdock created Debian on August 15, 1993."},
+  {q:"Which memory management technique is expensive and must be performed at execution time?", choices:["Static Partitioning","Swapping","Best Fit Allocation","Compaction"], ans:3, exp:"Compaction is expensive because it requires dynamic relocation at execution time — it cannot be done at assembly, compile, or load time."},
+  {q:"Chrome OS targets which group of users?", choices:["Power Users and Gamers","Medical Professionals","Students and Teachers","Government Employees"], ans:2, exp:"Chrome OS, created by Google in 2008, is designed for students and teachers. Chromium OS is the free open-source version."},
+  {q:"What analogy best describes Round Robin scheduling?", choices:["A PWD taking your seat","Serving pizza slices to everyone in rotation","The shortest queue at a bank","A judge setting case priority"], ans:1, exp:"Round Robin is like distributing pizza slices — each process gets a fixed quantum time before moving to the next in the queue."},
+  {q:"Which PCB component points to the next instruction the CPU will execute?", choices:["Process ID","Process State","CPU Registers","Program Counter"], ans:3, exp:"The Program Counter stores a pointer to the address of the next instruction that will be executed by the CPU."},
+  {q:"SJF scheduling selects the process based on:", choices:["Arrival order","Shortest remaining time","Smallest burst/duration time","Highest priority number"], ans:2, exp:"SJF (Shortest Job First) — the job with the smallest burst (duration) time is scheduled and executed first. It is non-preemptive."}
 ];
 
-let current = 0, score = 0, answered = new Array(50).fill(null);
+let current = 0, score = 0, answered = new Array(60).fill(null);
 
 function renderQ() {
   const q = questions[current];
-  document.getElementById('q-num').textContent = 'Question ' + (current + 1) + ' of 50';
+  document.getElementById('q-num').textContent = 'Question ' + (current + 1) + ' of 60';
   document.getElementById('q-text').textContent = q.q;
   const choiceEl = document.getElementById('choices');
   choiceEl.innerHTML = '';
@@ -820,11 +919,11 @@ function renderQ() {
   } else {
     fb.className = 'q-feedback';
   }
-  const pct = Math.max(2, Math.round(((current + 1) / 50) * 100));
+  const pct = Math.max(2, Math.round(((current + 1) / 60) * 100));
   document.getElementById('pbar').style.width = pct + '%';
-  document.getElementById('plab').textContent = (current + 1) + ' / 50';
+  document.getElementById('plab').textContent = (current + 1) + ' / 60';
   document.getElementById('btn-prev').disabled = current === 0;
-  const isLast = current === 49;
+  const isLast = current === 59;
   const btn = document.getElementById('btn-next');
   if (isLast && answered[current] !== null) {
     btn.textContent = 'Finish Quiz ✓';
@@ -843,18 +942,18 @@ function selectAnswer(idx) {
   renderQ();
 }
 
-function nextQ() { if (current < 49) { current++; renderQ(); } }
+function nextQ() { if (current < 59) { current++; renderQ(); } }
 function prevQ() { if (current > 0) { current--; renderQ(); } }
 
 function showResults() {
   document.getElementById('quiz-active').style.display = 'none';
   document.getElementById('quiz-results').style.display = 'block';
-  const pct = Math.round((score / 50) * 100);
+  const pct = Math.round((score / 60) * 100);
   const sEl = document.getElementById('res-score');
-  sEl.textContent = score + '/50';
+  sEl.textContent = score + '/60';
   sEl.style.color = pct >= 75 ? 'var(--green)' : pct >= 50 ? 'var(--amber)' : 'var(--red)';
   document.getElementById('res-label').textContent = pct + '% — ' + (pct >= 90 ? 'Outstanding!' : pct >= 75 ? 'Passed! Great job.' : pct >= 50 ? 'Almost there — review and retry.' : 'Keep studying — you got this!');
-  document.getElementById('res-grade').textContent = score + ' correct answers out of 50 items';
+  document.getElementById('res-grade').textContent = score + ' correct answers out of 60 items';
   const rev = document.getElementById('review-section');
   const L = ['A', 'B', 'C', 'D'];
   let html = '<h3 style="margin-bottom:16px">Answer Review</h3>';
@@ -873,7 +972,7 @@ function showResults() {
 }
 
 function retakeQuiz() {
-  current = 0; score = 0; answered = new Array(50).fill(null);
+  current = 0; score = 0; answered = new Array(60).fill(null);
   document.getElementById('quiz-active').style.display = 'block';
   document.getElementById('quiz-results').style.display = 'none';
   document.getElementById('score-live').textContent = 'Score: 0';
