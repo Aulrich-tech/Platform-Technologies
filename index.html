@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIT 2301 — Platform Technologies Reviewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --bg2: #13161b;
+    --bg3: #1a1e26;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #e8eaf0;
+    --text2: #9499a8;
+    --text3: #5d6270;
+    --accent: #5b8df6;
+    --accent2: #3d6de0;
+    --green: #3ecf6e;
+    --red: #f06060;
+    --amber: #f5a623;
+    --teal: #2dd4bf;
+    --purple: #a78bfa;
+    --pill-bg: rgba(91,141,246,0.12);
+    --pill-text: #8ab4fb;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── layout ── */
+  .shell {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── sidebar ── */
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 28px 0 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--text3);
+    text-transform: uppercase;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .sidebar-logo span {
+    display: block;
+    font-size: 17px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    cursor: pointer;
+    border-radius: 0;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text2);
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+    text-transform: uppercase;
+  }
+
+  .nav-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+  .nav-item.active { color: var(--accent); border-left-color: var(--accent); background: var(--pill-bg); }
+
+  .nav-num {
+    width: 20px; height: 20px;
+    background: var(--bg3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    color: var(--text3);
+    flex-shrink: 0;
+  }
+
+  .nav-item.active .nav-num { background: var(--accent2); color: #fff; }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 16px 20px 0;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── main ── */
+  .main {
+    flex: 1;
+    overflow: auto;
+  }
+
+  .page { display: none; padding: 48px 52px 80px; max-width: 860px; }
+  .page.active { display: block; }
+
+  /* ── hero ── */
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    color: var(--text2);
+    font-size: 16px;
+    max-width: 540px;
+    margin-bottom: 36px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .hero-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+
+  .hero-card-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .hero-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .start-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .start-btn:hover { background: var(--accent2); }
+
+  /* ── section headings ── */
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 28px 0 12px;
+  }
+
+  h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 20px 0 8px;
+  }
+
+  p { margin-bottom: 12px; color: var(--text2); }
+
+  /* ── content blocks ── */
+  .info-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+
+  .info-card .title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .info-card p { margin: 0; font-size: 14px; }
+
+  .pill {
+    display: inline-block;
+    background: var(--pill-bg);
+    color: var(--pill-text);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin: 2px;
+  }
+
+  .pill.green { background: rgba(62,207,110,0.1); color: #5de88a; }
+  .pill.amber { background: rgba(245,166,35,0.1); color: #f5c06a; }
+  .pill.purple { background: rgba(167,139,250,0.1); color: #c4b0fd; }
+  .pill.teal { background: rgba(45,212,191,0.1); color: #5ee8d5; }
+  .pill.red { background: rgba(240,96,96,0.1); color: #f58888; }
+
+  /* ── generation timeline ── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    border-left: 2px solid var(--border2);
+    margin: 20px 0;
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: -40px;
+    top: 4px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .tl-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .tl-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .tl-body { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  /* ── process steps ── */
+  .steps {
+    counter-reset: step;
+    margin: 12px 0;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--accent2);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .step-content { font-size: 14px; color: var(--text2); padding-top: 4px; }
+  .step-content strong { color: var(--text); }
+
+  /* ── two-col grid ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0;
+  }
+
+  /* ── OS cards ── */
+  .os-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 16px 0;
+  }
+
+  .os-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+
+  .os-card .os-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .os-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 5px;
+    font-size: 12.5px;
+  }
+
+  .os-row .key {
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    min-width: 78px;
+    flex-shrink: 0;
+  }
+
+  .os-row .val { color: var(--text2); }
+
+  /* ── tables ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13.5px;
+  }
+
+  .data-table th {
+    background: var(--bg3);
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+    vertical-align: top;
+  }
+
+  .data-table td:first-child { color: var(--text); font-weight: 600; }
+
+  /* ── QUIZ ── */
+  #page-quiz { max-width: 700px; }
+
+  .quiz-header {
+    margin-bottom: 32px;
+  }
+
+  .quiz-progress {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--bg3);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.3s;
+  }
+
+  .progress-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text3);
+    min-width: 60px;
+    text-align: right;
+  }
+
+  .q-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 28px 24px;
+    margin-bottom: 16px;
+  }
+
+  .q-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 10px;
+  }
+
+  .q-text {
+    font-size: 16px;
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 22px;
+  }
+
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+
+  .choice-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 13px 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s, background 0.15s;
+    width: 100%;
+  }
+
+  .choice-btn:hover:not(:disabled) {
+    border-color: var(--border2);
+    background: var(--bg2);
+  }
+
+  .choice-letter {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text3);
+    flex-shrink: 0;
+  }
+
+  .choice-text {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.4;
+  }
+
+  .choice-btn.correct {
+    border-color: var(--green);
+    background: rgba(62,207,110,0.07);
+  }
+
+  .choice-btn.correct .choice-letter {
+    background: var(--green);
+    color: #fff;
+    border-color: var(--green);
+  }
+
+  .choice-btn.correct .choice-text { color: #5de88a; }
+
+  .choice-btn.wrong {
+    border-color: var(--red);
+    background: rgba(240,96,96,0.07);
+  }
+
+  .choice-btn.wrong .choice-letter {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+  }
+
+  .choice-btn.wrong .choice-text { color: #f58888; }
+
+  .choice-btn:disabled { cursor: default; }
+
+  .q-feedback {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    display: none;
+  }
+
+  .q-feedback.show { display: block; }
+  .q-feedback.correct { background: rgba(62,207,110,0.1); color: #5de88a; border: 1px solid rgba(62,207,110,0.25); }
+  .q-feedback.wrong { background: rgba(240,96,96,0.1); color: #f58888; border: 1px solid rgba(240,96,96,0.25); }
+
+  .quiz-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+
+  .nav-btn {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .nav-btn:hover { background: var(--bg3); }
+  .nav-btn:disabled { opacity: 0.35; cursor: default; }
+  .nav-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .nav-btn.primary:hover { background: var(--accent2); }
+
+  /* ── Results ── */
+  .result-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .result-score {
+    font-family: 'Syne', sans-serif;
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .result-label {
+    font-size: 16px;
+    color: var(--text2);
+    margin-bottom: 24px;
+  }
+
+  .result-grade {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .retake-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 0.15s;
+    margin-top: 16px;
+  }
+
+  .retake-btn:hover { background: var(--accent2); }
+
+  /* ── scrollbar ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  @media (max-width: 720px) {
+    .sidebar { display: none; }
+    .page { padding: 28px 20px 60px; }
+    .two-col, .os-grid, .hero-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">CIT 2301<span>Platform Tech</span></div>
+  <nav>
+    <div class="nav-item active" onclick="showPage('home')"><div class="nav-num">⌂</div>Overview</div>
+    <div class="nav-item" onclick="showPage('m1')"><div class="nav-num">1</div>Operating Systems</div>
+    <div class="nav-item" onclick="showPage('m2')"><div class="nav-num">2</div>Boot Up</div>
+    <div class="nav-item" onclick="showPage('m3')"><div class="nav-num">3</div>Memory Mgmt</div>
+    <div class="nav-item" onclick="showPage('m4')"><div class="nav-num">4</div>OS Variants</div>
+    <div class="nav-item" onclick="showPage('m5')"><div class="nav-num">5</div>Process Manager</div>
+    <div class="nav-item" onclick="showPage('quiz')" style="margin-top:16px; color: var(--amber); border-left-color: transparent;"><div class="nav-num" style="background:rgba(245,166,35,0.15); color:var(--amber)">✦</div>50-Item Quiz</div>
+  </nav>
+  <div class="sidebar-footer">Midterm Reviewer</div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- HOME -->
+  <div id="page-home" class="page active">
+    <div class="hero-tag">Midterm Reviewer · CIT 2301</div>
+    <h1>Platform<br><em>Technologies</em></h1>
+    <p class="hero-sub">A complete reviewer covering all 5 modules from the midterm. Study each section, then challenge yourself with the 50-item quiz.</p>
+    <div class="hero-grid">
+      <div class="hero-card"><div class="hero-card-num">5</div><div class="hero-card-label">Modules</div></div>
+      <div class="hero-card"><div class="hero-card-num">50</div><div class="hero-card-label">Quiz Items</div></div>
+      <div class="hero-card"><div class="hero-card-num">12</div><div class="hero-card-label">OS Variants</div></div>
+    </div>
+    <button class="start-btn" onclick="showPage('m1')">Start Reviewing →</button>
+  </div>
+
+  <!-- MODULE 1: OPERATING SYSTEMS -->
+  <div id="page-m1" class="page">
+    <div class="section-tag">Module 1</div>
+    <h2>Operating Systems</h2>
+    <p style="color:var(--text2); margin-bottom:28px">History, functions, and types of operating systems.</p>
+
+    <h3>Generations of Operating Systems</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">0th Generation</div>
+        <div class="tl-title">Mechanical Machines</div>
+        <div class="tl-body">Machines used wheels, cogs, and gears. Slow speed, unreliable. <strong>No OS existed.</strong></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">1st Generation</div>
+        <div class="tl-title">Vacuum Tubes</div>
+        <div class="tl-body">Electrical designs replaced mechanical. Vacuum tubes introduced — took up more space and heated quickly. <strong>No OS existed.</strong></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">2nd Generation</div>
+        <div class="tl-title">Transistors</div>
+        <div class="tl-body">Vacuum tubes replaced by transistors. Had issues with current leakage. <strong>Batch Operating System introduced.</strong></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">3rd Generation</div>
+        <div class="tl-title">Integrated Circuits (IC)</div>
+        <div class="tl-body">Transistors replaced with silicon chips based on IC. Portable, good Job Control Languages, supported <strong>Multiprogramming.</strong></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">4th Generation</div>
+        <div class="tl-title">Large-Scale Integration</div>
+        <div class="tl-body"><strong>DOS, Linux, UNIX, and Windows</strong> were introduced. Large-scale integration used.</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+    <h3>Functions of the OS — PM DAU</h3>
+    <div class="info-card">
+      <div class="title">Mnemonic: PM DAU</div>
+      <p>Processor Manager · Memory Storage Manager · Device Manager · Application Interface · User Interface</p>
+    </div>
+
+    <div class="two-col">
+      <div class="info-card">
+        <div class="title">Processor Manager</div>
+        <p>Allocates enough processor time for each process/job so they run as efficiently as possible.</p>
+      </div>
+      <div class="info-card">
+        <div class="title">Memory Storage & Management</div>
+        <p>Ensures each process has enough memory to execute, and prevents processes from using each other's memory.</p>
+      </div>
+      <div class="info-card">
+        <div class="title">Device Manager</div>
+        <p>Manages I/O. Assigns high-priority blocks to drivers so hardware can be released for the next use quickly.</p>
+      </div>
+      <div class="info-card">
+        <div class="title">Application Interface (API)</div>
+        <p>Handles API actions so programmers don't need to know hardware control details.</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="title">User Interface</div>
+      <p>The part through which the user interacts. Windows & Macintosh use <strong>GUI</strong>; Unix uses <strong>shells</strong>.</p>
+    </div>
+
+    <hr class="section-divider">
+    <h3>Types of Operating Systems</h3>
+    <table class="data-table">
+      <thead><tr><th>Type</th><th>Description</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Real Time</td><td>Controls machinery, scientific instruments, industrial systems</td><td>Medical devices, Robotics, Avionics</td></tr>
+        <tr><td>Single User, Single Task</td><td>One user, one task at a time</td><td>PDAs (Personal Digital Assistants)</td></tr>
+        <tr><td>Single User, Multitask</td><td>One user, multiple applications simultaneously</td><td>Windows, MacOS, Linux, Android</td></tr>
+        <tr><td>Multiuser</td><td>Multiple users share a single computer's resources simultaneously</td><td>Windows Server, Linux, UNIX</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODULE 2: BOOT UP -->
+  <div id="page-m2" class="page">
+    <div class="section-tag">Module 2</div>
+    <h2>Boot Up</h2>
+    <p style="color:var(--text2); margin-bottom:28px">The startup sequence, key components, and I/O structures.</p>
+
+    <h3>Key Definitions</h3>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="title">Booting</div>
+        <p>The starting-up sequence of a computer when turned on — a series of operations performed in the computer.</p>
+      </div>
+      <div class="info-card">
+        <div class="title">BIOS</div>
+        <p>Basic Input/Output System. Pre-installed, low-level firmware on the motherboard. Initializes hardware on power-on. Contains hardware instructions to open up.</p>
+      </div>
+      <div class="info-card">
+        <div class="title">Bootable Device</div>
+        <p>Any storage medium the motherboard can detect and read to load the OS during startup. Examples: USB/Flash, Harddisk, SSD.</p>
+      </div>
+      <div class="info-card">
+        <div class="title">Boot Sector</div>
+        <p>Gateway to the OS — holds vital instructions needed for startup.</p>
+      </div>
+      <div class="info-card">
+        <div class="title">OS Kernel</div>
+        <p>The core program at the heart of a computer's operating system.</p>
+      </div>
+    </div>
+
+    <h3>Boot-Up Sequence</h3>
+    <div class="steps">
+      <div class="step-item"><div class="step-num">1</div><div class="step-content">The <strong>CPU</strong> executes an instruction in the <strong>BIOS</strong> containing the start-up program.</div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-content">The program <strong>checks the devices</strong> connected to the computer.</div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-content">BIOS <strong>looks for a bootable device</strong>.</div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-content">Loads the <strong>Boot Sector</strong> and transfers execution into it.</div></div>
+      <div class="step-item"><div class="step-num">5</div><div class="step-content">Boot Sector (often the OS) loads and executes the <strong>OS Kernel</strong> to continue startup.</div></div>
+    </div>
+
+    <hr class="section-divider">
+    <h3>Interrupts</h3>
+    <div class="info-card">
+      <div class="title">Interrupt</div>
+      <p>A signal from a device or program requiring the OS to stop and determine the next step. The computer either resumes the current program or begins running another.</p>
+      <p style="margin-top:8px"><strong>Interrupt Handler:</strong> Included in the OS; prioritizes interrupts and saves them in a queue if more than one is waiting.</p>
+    </div>
+    <div class="info-card">
+      <div class="title">Trap / Exception</div>
+      <p>A <em>software-generated</em> interruption caused by an error or a specific user program request. A fault or violation generated by the processor in response to an access violation or problematic instruction execution.</p>
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="title">Hardware Interrupt</div>
+        <p>Signal to the processor comes from an <strong>external device</strong>.</p>
+      </div>
+      <div class="info-card">
+        <div class="title">Software Interrupt</div>
+        <p>User-programmed interrupt (or trap). Forces the program to jump to a well-known address based on the interrupt number.</p>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+    <h3>I/O Structure</h3>
+    <div class="info-card">
+      <div class="title">General-Purpose Computer System (GP-CS)</div>
+      <p>Consists of CPUs and multiple <strong>device controllers</strong> connected through a common bus.</p>
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="title">Device Driver</div>
+        <p>Understands the device controller and presents a uniform interface to the rest of the OS. Typically one driver per device controller.</p>
+      </div>
+      <div class="info-card">
+        <div class="title">Device Controller</div>
+        <p>Responsible for a specific type of device. Maintains <strong>Local Buffer Storage (RAM)</strong> and a set of specific-purpose registers.</p>
+      </div>
+    </div>
+
+    <h3>Interrupt-Driven I/O</h3>
+    <div class="steps">
+      <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>Device Driver</strong> loads appropriate registers in the device controller (translates the controller).</div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>Device Controller</strong> examines registers and transfers data from device to local buffer.</div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>Interruption</strong> — once transfer is complete, the device driver is notified via interrupt.</div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>Device Driver</strong> returns control to the OS. Note: Good for small data; high overhead for bulk data.</div></div>
+    </div>
+
+    <h3>Direct Memory Access (DMA)</h3>
+    <div class="steps">
+      <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>Device Driver</strong> sets up buffers, pointers, and counters for the I/O device.</div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>Device Controller</strong> transfers an entire block of data directly to/from memory — <em>no CPU intervention</em>.</div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>Interruption</strong> — only <em>one</em> interrupt per block tells the driver the operation is complete.</div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>CPU</strong> is free to accomplish other tasks during the DMA transfer.</div></div>
+    </div>
+
+    <hr class="section-divider">
+    <h3>Storage Hierarchy</h3>
+    <table class="data-table">
+      <thead><tr><th>Level</th><th>Type</th><th>Speed</th><th>Size</th><th>Cost</th><th>Volatile?</th></tr></thead>
+      <tbody>
+        <tr><td>Top</td><td>Registers</td><td>Fastest</td><td>Smallest</td><td>Most expensive</td><td>Yes</td></tr>
+        <tr><td>↓</td><td>Cache</td><td>Very fast</td><td>Small</td><td>High</td><td>Yes</td></tr>
+        <tr><td>↓</td><td>Main Memory (RAM)</td><td>Fast</td><td>Limited</td><td>Medium</td><td>Yes</td></tr>
+        <tr><td>↓</td><td>Electronic Disk / SSD</td><td>Medium</td><td>Large</td><td>Medium</td><td>No</td></tr>
+        <tr><td>↓</td><td>Magnetic Disk</td><td>Slow</td><td>Large</td><td>Low</td><td>No</td></tr>
+        <tr><td>↓</td><td>Optical Disk</td><td>Slower</td><td>Large</td><td>Low</td><td>No</td></tr>
+        <tr><td>Bottom</td><td>Magnetic Tapes</td><td>Slowest</td><td>Largest</td><td>Most cost per bit</td><td>No</td></tr>
+      </tbody>
+    </table>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="title">Volatile</div>
+        <p>Loses its content when power is removed. (e.g., RAM)</p>
+      </div>
+      <div class="info-card">
+        <div class="title">Non-Volatile</div>
+        <p>Retains contents even when power is removed. (e.g., Magnetic disk, Tapes)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 3: MEMORY MANAGEMENT -->
+  <div id="page-m3" class="page">
+    <div class="section-tag">Module 3</div>
+    <h2>Memory Management</h2>
+    <p style="color:var(--text2); margin-bottom:28px">Partitioning, allocation techniques, and deallocation strategies.</p>
+
+    <h3>Single Contiguous Memory Scheme</h3>
+    <div class="info-card">
+      <p>Physical memory is divided into two contiguous areas:</p>
+      <p style="margin-top:8px">① Permanently allocated to the <strong>portion of the OS</strong><br>② The <strong>User Process Area</strong></p>
+    </div>
+
+    <h3>Contiguous Memory Allocation Techniques</h3>
+    <div class="info-card">
+      <div class="title">1. Static Partitioning</div>
+      <p>Main memory has a pre-divided partition that is divided into <strong>fixed sizes</strong>. Partitions cannot be changed and can store only <em>one process</em>.</p>
+      <p style="margin-top:8px">Example: 10 KB memory → fixed partitions (2kb | 3kb | 4kb | 1kb) — allocated to processes depending on the algorithm used.</p>
+    </div>
+    <div class="info-card">
+      <div class="title">2. Dynamic Partitioning</div>
+      <p>Uses a <strong>variable-size scheme</strong>; performs allocation dynamically. The partition size is determined by the <em>size of the arriving process</em>.</p>
+    </div>
+
+    <hr class="section-divider">
+    <h3>Allocation Techniques</h3>
+    <table class="data-table">
+      <thead><tr><th>Technique</th><th>Strategy</th></tr></thead>
+      <tbody>
+        <tr><td>First Fit</td><td>Allocate the <strong>first hole</strong> that is big enough.</td></tr>
+        <tr><td>Next Fit</td><td>Same as First Fit, but always starts the search from the <strong>last allocated hole</strong>.</td></tr>
+        <tr><td>Best Fit</td><td>Allocate the <strong>smallest hole</strong> that is big enough.</td></tr>
+        <tr><td>Worst Fit</td><td>Allocate the <strong>largest hole</strong>.</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="section-divider">
+    <h3>Deallocation Techniques</h3>
+    <div class="info-card">
+      <div class="title">Swapping</div>
+      <p>A mechanism where a process is <strong>temporarily swapped out</strong> of main memory to secondary memory, then swapped back in when needed.</p>
+      <p style="margin-top:8px"><strong>Example:</strong> Main Memory holds P1 & P2; Secondary holds P3–Pn. If P1 goes for I/O wait → swaps out to secondary, P3 swaps in. After I/O, P1 goes back and P3 swaps back out.</p>
+    </div>
+    <div class="info-card">
+      <div class="title">Compaction</div>
+      <p>Shuffles memory content so all free space comes together in <strong>one large block</strong>.</p>
+      <p style="margin-top:8px"><strong>Problem:</strong> Relocation must be dynamic and done at execution time — cannot be done if static or at assembly/load time.</p>
+      <p style="margin-top:4px"><strong>Cost:</strong> Expensive.</p>
+      <p style="margin-top:8px"><strong>Example:</strong> Holes of 50 KB + 450 KB + 200 KB are combined into one 700 KB hole.</p>
+    </div>
+  </div>
+
+  <!-- MODULE 4: OS VARIANTS -->
+  <div id="page-m4" class="page">
+    <div class="section-tag">Module 4</div>
+    <h2>OS Variants</h2>
+    <p style="color:var(--text2); margin-bottom:28px">Detailed profiles of major operating systems covered in the midterm.</p>
+
+    <div class="os-grid">
+
+      <div class="os-card">
+        <div class="os-name">Android OS <span class="pill">Mobile</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">Andy Rubin</div></div>
+        <div class="os-row"><div class="key">Company</div><div class="val">Acquired by Google in 2005</div></div>
+        <div class="os-row"><div class="key">Foundation</div><div class="val">Linux Kernel</div></div>
+        <div class="os-row"><div class="key">Target</div><div class="val">Mobile Users</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">Bayanihan OS <span class="pill teal">PH</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">ASTI / Bayanihan Project (2001)</div></div>
+        <div class="os-row"><div class="key">Company</div><div class="val">DOST</div></div>
+        <div class="os-row"><div class="key">Foundation</div><div class="val">Debian-based</div></div>
+        <div class="os-row"><div class="key">Target</div><div class="val">Filipino Schools, Gov't, Institutions</div></div>
+        <div class="os-row"><div class="key">Latest</div><div class="val">Bayanihan Linux v5.4 (Apr 25, 2011)</div></div>
+        <div class="os-row"><div class="key">Features</div><div class="val">Samba (Windows compat), Firefox/Konqueror</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">Chrome OS <span class="pill">Google</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">Google (officially released July 2008)</div></div>
+        <div class="os-row"><div class="key">Foundation</div><div class="val">Linux Kernel</div></div>
+        <div class="os-row"><div class="key">Target</div><div class="val">Students and Teachers</div></div>
+        <div class="os-row"><div class="key">Note</div><div class="val">Chromium OS = free/open version (2009)</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">Debian OS <span class="pill purple">GNU</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">Ian Murdock (Aug 15, 1993); named after Ian & wife Debra</div></div>
+        <div class="os-row"><div class="key">Sponsor</div><div class="val">FSF's GNU Project</div></div>
+        <div class="os-row"><div class="key">Interface</div><div class="val">GNOME (default), KDE Plasma, Xfce, Cinnamon</div></div>
+        <div class="os-row"><div class="key">Foundation</div><div class="val">Linux Kernel</div></div>
+        <div class="os-row"><div class="key">Target</div><div class="val">Professionals</div></div>
+        <div class="os-row"><div class="key">Versions</div><div class="val">Named after Pixar Toy Story characters</div></div>
+        <div class="os-row"><div class="key">First</div><div class="val">Debian 1.1 "Buzz"</div></div>
+        <div class="os-row"><div class="key">Latest</div><div class="val">Debian 13 "Trixie"</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">Fedora OS <span class="pill red">Red Hat</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">Warren Togami (2002)</div></div>
+        <div class="os-row"><div class="key">Company</div><div class="val">Red Hat</div></div>
+        <div class="os-row"><div class="key">Interface</div><div class="val">GNOME, KDE Plasma, Xfce</div></div>
+        <div class="os-row"><div class="key">Foundation</div><div class="val">Linux Kernel</div></div>
+        <div class="os-row"><div class="key">First</div><div class="val">Fedora Core 1</div></div>
+        <div class="os-row"><div class="key">Latest</div><div class="val">Fedora Linux 4.4</div></div>
+        <div class="os-row"><div class="key">Pkg Mgr</div><div class="val">RPM Fusion; Apps from Flathub</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">Harmony OS <span class="pill amber">Huawei</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">Huawei (after US trade restrictions)</div></div>
+        <div class="os-row"><div class="key">Interface</div><div class="val">Desktop, Mobile, Tablet, Distributed</div></div>
+        <div class="os-row"><div class="key">Target</div><div class="val">Mainland Chinese Users</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">Hyper OS <span class="pill">Xiaomi</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">Lei Jun (Xiaomi co-founder & CEO, 2023)</div></div>
+        <div class="os-row"><div class="key">Company</div><div class="val">Xiaomi Inc.</div></div>
+        <div class="os-row"><div class="key">Note</div><div class="val">Replacement for MIUI</div></div>
+        <div class="os-row"><div class="key">Target</div><div class="val">Power Users</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">Linux OS <span class="pill green">Open Source</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">Linus Torvalds (1991); mascot: Tux 🐧 (bitten by penguin)</div></div>
+        <div class="os-row"><div class="key">Supporters</div><div class="val">IBM, Oracle, Compaq</div></div>
+        <div class="os-row"><div class="key">Interface</div><div class="val">KDE Plasma, GNOME</div></div>
+        <div class="os-row"><div class="key">Foundation</div><div class="val">UNIX-based</div></div>
+        <div class="os-row"><div class="key">First</div><div class="val">FreaX (Free, Freak, Unix)</div></div>
+        <div class="os-row"><div class="key">Latest</div><div class="val">Linux Kernel 7.0.11</div></div>
+        <div class="os-row"><div class="key">Pkg Mgr</div><div class="val">Dandified YUM (DNF), APT</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">Mac OS <span class="pill">Apple</span></div>
+        <div class="os-row"><div class="key">Company</div><div class="val">Apple Inc.</div></div>
+        <div class="os-row"><div class="key">Interface</div><div class="val">Menu, Dock, Finder, Control Center, Mission Control</div></div>
+        <div class="os-row"><div class="key">Foundation</div><div class="val">UNIX-based</div></div>
+        <div class="os-row"><div class="key">Versions</div><div class="val">Originally Big Cats → now US Landmarks</div></div>
+        <div class="os-row"><div class="key">First</div><div class="val">Mac OS X 10.0</div></div>
+        <div class="os-row"><div class="key">Latest</div><div class="val">Mac OS Tahoe 26.5</div></div>
+        <div class="os-row"><div class="key">Features</div><div class="val">Gatekeeper, File Vault, Ecosystem Harmony (Apple only)</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">Solaris OS <span class="pill teal">Oracle</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">Sun Microsystems; SunOS (1983), Solaris 2 (1992)</div></div>
+        <div class="os-row"><div class="key">Company</div><div class="val">Sun Microsystem</div></div>
+        <div class="os-row"><div class="key">Interface</div><div class="val">CDE, GNOME</div></div>
+        <div class="os-row"><div class="key">Foundation</div><div class="val">UNIX-based System-V</div></div>
+        <div class="os-row"><div class="key">First</div><div class="val">Solaris 1</div></div>
+        <div class="os-row"><div class="key">Latest</div><div class="val">Oracle Solaris 11</div></div>
+        <div class="os-row"><div class="key">Features</div><div class="val">SPARC (reduces HW costs), SMP (also used by Mac OS)</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">Ubuntu OS <span class="pill amber">Canonical</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">Mark Shuttleworth (2004)</div></div>
+        <div class="os-row"><div class="key">Meaning</div><div class="val">"Ubuntu" = Humanity</div></div>
+        <div class="os-row"><div class="key">Company</div><div class="val">Canonical Ltd.</div></div>
+        <div class="os-row"><div class="key">Interface</div><div class="val">GNOME, CLI</div></div>
+        <div class="os-row"><div class="key">Foundation</div><div class="val">Linux-Based</div></div>
+        <div class="os-row"><div class="key">Target</div><div class="val">Programmers, Education, Server, Cybersecurity</div></div>
+        <div class="os-row"><div class="key">Versions</div><div class="val">Alphabetical: Adjective + Animal (e.g., Warty Warthog)</div></div>
+        <div class="os-row"><div class="key">First</div><div class="val">Ubuntu 4.10 Warty Warthog</div></div>
+        <div class="os-row"><div class="key">Latest</div><div class="val">Ubuntu 26.04 Resolute Raccoon</div></div>
+      </div>
+
+      <div class="os-card">
+        <div class="os-name">UNIX OS <span class="pill purple">Foundation</span></div>
+        <div class="os-row"><div class="key">Creator</div><div class="val">Ken Thompson & Dennis Ritchie</div></div>
+        <div class="os-row"><div class="key">Company</div><div class="val">AT&T (System V)</div></div>
+        <div class="os-row"><div class="key">Interface</div><div class="val">CLI, Shell</div></div>
+        <div class="os-row"><div class="key">Foundation</div><div class="val">Assembly language → switched to C</div></div>
+        <div class="os-row"><div class="key">Target</div><div class="val">Programmers</div></div>
+        <div class="os-row"><div class="key">First</div><div class="val">BSD and SVR4 (System V)</div></div>
+        <div class="os-row"><div class="key">Note</div><div class="val">Made way for other OS versions</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODULE 5: PROCESS MANAGER -->
+  <div id="page-m5" class="page">
+    <div class="section-tag">Module 5</div>
+    <h2>Process Manager</h2>
+    <p style="color:var(--text2); margin-bottom:28px">Process management, PCB, and CPU scheduling algorithms.</p>
+
+    <h3>Key Definitions</h3>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="title">Process Management</div>
+        <p>Includes creating and deleting processes, and providing mechanisms for processes to communicate and synchronize. Whenever there are several processes, they allocate the processor.</p>
+      </div>
+      <div class="info-card">
+        <div class="title">Process</div>
+        <p>Execution of a program that performs a specified action — an execution unit where a program runs. Different tasks assigned to the system to perform.</p>
+      </div>
+    </div>
+
+    <h3>Process States (5 Steps)</h3>
+    <div class="steps">
+      <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>New</strong> — The state where the process is created.</div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>Ready</strong> — Waiting for the processor.</div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>Running</strong> — The process is executing.</div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>Waiting</strong> — Waiting for some resource (e.g., I/O or event).</div></div>
+      <div class="step-item"><div class="step-num">5</div><div class="step-content"><strong>Terminated</strong> — The process has finished executing.</div></div>
+    </div>
+
+    <div class="info-card">
+      <div class="title">Process Creation</div>
+      <p>After the OS loads, it creates an initial <strong>parent process</strong>. The parent process generates several <strong>child processes</strong>.</p>
+    </div>
+
+    <hr class="section-divider">
+    <h3>Process Control Block (PCB)</h3>
+    <div class="info-card">
+      <p>Also called the <strong>control block</strong>. The data structure the OS maintains for every process. Contains several pieces of information about the process.</p>
+    </div>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Component</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Process ID</td><td>Unique identifier of the process.</td></tr>
+        <tr><td>2</td><td>Process State</td><td>Current state: new, ready, running, waiting, or terminated.</td></tr>
+        <tr><td>3</td><td>Process Priority</td><td>Numerical value representing the priority of the process.</td></tr>
+        <tr><td>4</td><td>Accounting Information</td><td>Description/accounting of the resources used by the process.</td></tr>
+        <tr><td>5</td><td>Program Counter</td><td>Pointer to the next instruction to be executed.</td></tr>
+        <tr><td>6</td><td>CPU Registers</td><td>Holds temporary information of the process when an interrupt occurs (halted).</td></tr>
+        <tr><td>7</td><td>PCB Pointers</td><td>Address of the next PCB whose process state is ready.</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="section-divider">
+    <h3>CPU Scheduling</h3>
+
+    <div class="info-card">
+      <div class="title">Preemptive Scheduling</div>
+      <p>Occurs when: (a) process switches from <strong>running → ready</strong> (e.g., interrupt), or (b) process switches from <strong>waiting → ready</strong> (e.g., I/O completion).</p>
+      <p style="margin-top:8px"><em>Example:</em> Someone takes your seat (PWD priority) / Switching rooms because someone else will use it.</p>
+      <p style="margin-top:8px"><strong>Algorithms:</strong> <span class="pill">SRTF</span> <span class="pill">Priority</span> <span class="pill">Round Robin</span></p>
+    </div>
+    <div class="info-card">
+      <div class="title">Non-Preemptive Scheduling</div>
+      <p>Occurs when the process switches from <strong>running → waiting</strong> (e.g., I/O request). No chance of stopping even if several processes enter.</p>
+      <p style="margin-top:8px"><em>Example:</em> No one else can sit as long as you're sitting / Other students wait for the current class to finish.</p>
+      <p style="margin-top:8px"><strong>Algorithms:</strong> <span class="pill">FCFS</span> <span class="pill">SJF</span> <span class="pill">Priority</span> <span class="pill">Round Robin</span></p>
+    </div>
+
+    <h3>Scheduling Algorithms</h3>
+    <table class="data-table">
+      <thead><tr><th>Algorithm</th><th>Full Name</th><th>How It Works</th></tr></thead>
+      <tbody>
+        <tr><td>FCFS</td><td>First Come, First Serve</td><td>Like FIFO. The process that arrives first is executed first. CPU is given to the first requesting process.</td></tr>
+        <tr><td>SJF</td><td>Shortest Job First</td><td>Job with the smallest burst/duration time is scheduled first.</td></tr>
+        <tr><td>SRTF</td><td>Shortest Remaining Time First</td><td>Preemptive version of SJF. Shortest remaining time is executed next.</td></tr>
+        <tr><td>Priority</td><td>Priority Scheduling</td><td>Urgent processes run first based on priority number. CPU allocation is based on the priority number.</td></tr>
+        <tr><td>RR</td><td>Round Robin</td><td>Fixed time (quantum time) given to each job. Process preempted after quantum. Cycles through queue. Example: alternating pizza slices.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- QUIZ PAGE -->
+  <div id="page-quiz" class="page">
+    <div class="section-tag">50-Item Quiz</div>
+    <h2>Knowledge Check</h2>
+    <p style="color:var(--text2); margin-bottom:28px">Answer all 50 questions covering all modules. Your score will be shown at the end.</p>
+
+    <div id="quiz-active">
+      <div class="quiz-header">
+        <div class="quiz-progress">
+          <div class="progress-bar"><div class="progress-fill" id="pbar" style="width:2%"></div></div>
+          <div class="progress-label" id="plab">1 / 50</div>
+        </div>
+        <div id="score-live" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)">Score: 0</div>
+      </div>
+      <div class="q-card" id="q-card">
+        <div class="q-number" id="q-num">Question 1</div>
+        <div class="q-text" id="q-text"></div>
+        <div class="choices" id="choices"></div>
+        <div class="q-feedback" id="q-feedback"></div>
+      </div>
+      <div class="quiz-nav">
+        <button class="nav-btn" id="btn-prev" onclick="prevQ()" disabled>← Prev</button>
+        <button class="nav-btn primary" id="btn-next" onclick="nextQ()">Next →</button>
+      </div>
+    </div>
+
+    <div id="quiz-results" style="display:none">
+      <div class="result-box">
+        <div class="result-score" id="res-score"></div>
+        <div class="result-label" id="res-label"></div>
+        <div class="result-grade" id="res-grade"></div>
+        <br>
+        <button class="retake-btn" onclick="retakeQuiz()">Retake Quiz</button>
+      </div>
+      <div id="review-section"></div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+const pages = {
+  'home': 'page-home',
+  'm1': 'page-m1',
+  'm2': 'page-m2',
+  'm3': 'page-m3',
+  'm4': 'page-m4',
+  'm5': 'page-m5',
+  'quiz': 'page-quiz'
+};
+
+function showPage(key) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(pages[key]).classList.add('active');
+  const navItems = document.querySelectorAll('.nav-item');
+  const order = ['home','m1','m2','m3','m4','m5','quiz'];
+  const idx = order.indexOf(key);
+  if(idx >= 0) navItems[idx].classList.add('active');
+  document.querySelector('.main').scrollTo(0,0);
+}
+
+const questions = [
+  // Module 1 — OS History & Functions
+  {q:"What is the mnemonic used to remember the 5 functions of the OS?", choices:["HGDPA","PM DAU","ABCDE","CPU IO"], ans:1, exp:"PM DAU stands for Processor Manager, Memory Storage Manager, Device Manager, Application Interface, User Interface."},
+  {q:"In which generation were transistors introduced to replace vacuum tubes?", choices:["1st Generation","2nd Generation","3rd Generation","4th Generation"], ans:1, exp:"The 2nd Generation replaced vacuum tubes with transistors, which had issues with current leakage."},
+  {q:"Which generation introduced DOS, Linux, UNIX, and Windows?", choices:["2nd Generation","3rd Generation","4th Generation","0th Generation"], ans:2, exp:"The 4th Generation used large-scale integration and introduced DOS, Linux, UNIX, and Windows."},
+  {q:"The 3rd Generation introduced which key concept supporting multiple programs?", choices:["Batch Processing","Multiprogramming","DMA","BIOS"], ans:1, exp:"The 3rd Generation, using silicon chips based on IC, supported Multiprogramming."},
+  {q:"Which OS type controls machinery, scientific instruments, and industrial systems?", choices:["Multiuser","Real Time","Single User Multitask","Batch"], ans:1, exp:"Real-Time OS is designed for medical devices, robotics, and avionics — controlling machinery and scientific instruments."},
+  {q:"Windows Server, Linux, and UNIX are examples of which type of OS?", choices:["Real Time","Single User Single Task","Multiuser","Single User Multitask"], ans:2, exp:"Multiuser OS allows multiple users to simultaneously use the resources on a single computer."},
+  {q:"PDAs (Personal Digital Assistants) are an example of which OS type?", choices:["Real Time","Single User, Single Task","Single User, Multitask","Multiuser"], ans:1, exp:"Single User, Single Task OS allows one user to do only one thing at a time — like PDAs."},
+  {q:"The User Interface function of the OS uses shells in which operating system?", choices:["Windows","Macintosh","Unix","Android"], ans:2, exp:"Unix uses shells for its User Interface, while Windows and Macintosh use GUIs."},
+  {q:"Which function of the OS prevents one process from using another's memory?", choices:["Device Manager","Processor Manager","Memory Storage Management","Application Interface"], ans:2, exp:"Memory Storage Management ensures each process has enough memory AND that one process doesn't use another's allocated memory."},
+  {q:"Vacuum tubes were introduced in which OS generation?", choices:["0th Generation","1st Generation","2nd Generation","3rd Generation"], ans:1, exp:"The 1st Generation introduced vacuum tubes, replacing mechanical machines, but no OS existed yet."},
+
+  // Module 2 — Boot Up
+  {q:"What does BIOS stand for?", choices:["Basic Input/Output System","Boot Initialization Operating System","Binary I/O Structure","Basic Integrated OS Software"], ans:0, exp:"BIOS = Basic Input/Output System. It's pre-installed, low-level firmware on the motherboard."},
+  {q:"What is the correct order in the boot-up sequence?", choices:["BIOS → Boot Sector → Bootable Device → CPU","CPU → BIOS → Bootable Device → Boot Sector → Kernel","Boot Sector → BIOS → CPU → Kernel","Kernel → BIOS → Boot Sector → CPU"], ans:1, exp:"CPU executes BIOS → checks devices → BIOS finds bootable device → loads Boot Sector → Boot Sector loads OS Kernel."},
+  {q:"The OS Kernel is best described as:", choices:["The BIOS firmware","The core program at the heart of the OS","The Boot Sector","A device driver"], ans:1, exp:"The OS Kernel is the core program at the heart of a computer's operating system."},
+  {q:"An interrupt that comes from an external device is called:", choices:["Software Interrupt","Trap","Exception","Hardware Interrupt"], ans:3, exp:"A Hardware Interrupt occurs when the signal for the processor is from an external device."},
+  {q:"A software-generated interruption caused by an error or user program request is called:", choices:["Hardware Interrupt","DMA Signal","Trap or Exception","Kernel Panic"], ans:2, exp:"A Trap or Exception is a software-generated interruption — a fault or access violation generated by the processor."},
+  {q:"What component manages the interrupt queue in the OS?", choices:["Device Driver","Interrupt Handler","Device Controller","Boot Sector"], ans:1, exp:"The Interrupt Handler is included in the OS; it prioritizes interrupts and saves them in a queue if more than one is waiting."},
+  {q:"In Direct Memory Access (DMA), how many interrupts are generated per block transfer?", choices:["One per byte","One per block","Two per block","None"], ans:1, exp:"DMA generates only ONE interrupt per block to tell the device driver the operation has completed."},
+  {q:"Which storage type is Volatile?", choices:["Magnetic Tape","Optical Disk","RAM","Magnetic Disk"], ans:2, exp:"RAM is volatile — it loses its content when power is removed."},
+  {q:"In the storage hierarchy, which is the fastest and smallest?", choices:["Cache","RAM","Main Memory","Registers"], ans:3, exp:"Registers are the smallest, fastest, and most expensive — at the very top of the storage hierarchy."},
+  {q:"Which storage medium has the largest capacity but slowest access?", choices:["RAM","Cache","Electronic Disk","Magnetic Tapes"], ans:3, exp:"Magnetic Tapes are at the bottom of the hierarchy: largest, cheapest (most cost per bit), and slowest."},
+  {q:"In Interrupt-Driven I/O, who informs the device driver via interrupt that the operation is finished?", choices:["CPU","Device Driver itself","Device Controller","OS Kernel"], ans:2, exp:"In step 3, the Device Controller informs the Device Driver via interrupt once the data transfer is complete."},
+  {q:"What is the main advantage of DMA over Interrupt-Driven I/O?", choices:["It is cheaper","The CPU is free to do other tasks during transfer","It uses less memory","It generates more interrupts"], ans:1, exp:"During DMA, the CPU is available to accomplish other tasks while the device controller handles the entire block transfer."},
+
+  // Module 3 — Memory Management
+  {q:"In Static Partitioning, each partition stores:", choices:["Multiple processes","Only one process","As many as fit","Two processes max"], ans:1, exp:"Static Partitioning uses fixed-size partitions that cannot be changed and can store only one process each."},
+  {q:"Which allocation technique starts searching from the last allocated hole?", choices:["First Fit","Best Fit","Next Fit","Worst Fit"], ans:2, exp:"Next Fit is the same as First Fit, but always starts searching from the last allocated hole."},
+  {q:"Which allocation technique allocates the smallest hole that is big enough?", choices:["First Fit","Next Fit","Best Fit","Worst Fit"], ans:2, exp:"Best Fit allocates the smallest hole that is sufficient for the process."},
+  {q:"Compaction solves memory fragmentation by:", choices:["Dividing memory into fixed partitions","Moving free space to create one large block","Swapping processes to secondary memory","Allocating the largest hole"], ans:1, exp:"Compaction shuffles memory content so all free space comes together in one large block."},
+  {q:"A problem with Compaction is that relocation must be done at:", choices:["Assembly time","Load time","Execution time (dynamic)","Compile time"], ans:2, exp:"Compaction requires dynamic relocation done at execution time — it cannot be done at static, assembly, or load time."},
+  {q:"In Swapping, what happens to a process when it goes for I/O wait?", choices:["It terminates","It swaps out to secondary memory","It stays in main memory","It is deleted"], ans:1, exp:"When a process goes for I/O wait, it is temporarily swapped out to secondary memory and swapped back after I/O."},
+  {q:"In Dynamic Partitioning, the partition size is determined by:", choices:["The OS administrator","A fixed pre-defined value","The size of the arriving process","The CPU speed"], ans:2, exp:"Dynamic Partitioning uses a variable-size scheme where partition size is determined by the arriving process's size."},
+  {q:"Which allocation technique allocates the largest available hole?", choices:["First Fit","Next Fit","Best Fit","Worst Fit"], ans:3, exp:"Worst Fit allocates the largest available hole in memory."},
+
+  // Module 4 — OS Variants
+  {q:"Bayanihan OS was created by which Philippine government agency?", choices:["DICT","DOST","CHED","DTI"], ans:1, exp:"Bayanihan OS was created by ASTI (Advanced Science and Technology Institute) under DOST in 2001."},
+  {q:"Debian OS versions are named after characters from:", choices:["Star Wars","Harry Potter","Pixar's Toy Story","Marvel Comics"], ans:2, exp:"Debian versions are named after Pixar Toy Story characters (e.g., Buzz, Trixie)."},
+  {q:"Who created Linux OS?", choices:["Dennis Ritchie","Ken Thompson","Ian Murdock","Linus Torvalds"], ans:3, exp:"Linus Torvalds created Linux in 1991. His mascot is Tux (after getting bitten by a penguin)."},
+  {q:"What does 'Ubuntu' mean?", choices:["Power","Humanity","Freedom","Community"], ans:1, exp:"Ubuntu means 'Humanity' — it was created by Mark Shuttleworth in 2004."},
+  {q:"Mac OS version names are currently based on:", choices:["Big Cats","US Landmarks","Planets","Ocean Cities"], ans:1, exp:"Mac OS versions were originally named after Big Cats but now use US Landmarks (e.g., Tahoe)."},
+  {q:"Which OS was created after US trade restrictions affected Huawei?", choices:["Hyper OS","Chrome OS","Harmony OS","Solaris OS"], ans:2, exp:"Harmony OS was created by Huawei after US trade restrictions prevented them from using other OS platforms."},
+  {q:"UNIX was created by:", choices:["Linus Torvalds and Andy Rubin","Ken Thompson and Dennis Ritchie","Mark Shuttleworth and Ian Murdock","Warren Togami and Lei Jun"], ans:1, exp:"UNIX was created by Ken Thompson and Dennis Ritchie at AT&T."},
+  {q:"Fedora OS uses which package manager?", choices:["APT","Homebrew","RPM Fusion / Flathub","Snap"], ans:2, exp:"Fedora uses RPM Fusion as its package manager; applications are downloaded from Flathub."},
+  {q:"The first version of Linux was named:", choices:["Tux","Penguin","FreaX","LinuxOS"], ans:2, exp:"The first version of Linux was named 'FreaX' — combining Free, Freak, and Unix."},
+  {q:"Solaris OS was originally called:", choices:["OpenSolaris","SunOS","SPARC OS","Oracle Unix"], ans:1, exp:"Solaris was originally called SunOS in 1983 by Sun Microsystems, later renamed Solaris 2 in 1992."},
+  {q:"What does Gatekeeper and File Vault refer to?", choices:["Solaris security tools","Fedora package tools","Mac OS exclusive security features","Linux kernel modules"], ans:2, exp:"Gatekeeper and File Vault are security features exclusive to Apple, found in all Mac OS versions."},
+  {q:"Hyper OS replaced which previous Xiaomi OS?", choices:["EMUI","One UI","MIUI","ColorOS"], ans:2, exp:"Hyper OS was created by Lei Jun (Xiaomi CEO) in 2023 as a replacement for MIUI."},
+  {q:"Ubuntu's versioning scheme uses which format?", choices:["Sequential numbers","Random codenames","Alphabetical: Adjective + Animal","Year + Country"], ans:2, exp:"Ubuntu versions use an alphabetical scheme pairing an adjective with an animal (e.g., Warty Warthog, Resolute Raccoon)."},
+  {q:"SPARC in Solaris OS stands for:", choices:["Scalable Processor Architecture","Simple Parallel Access Runtime Core","Secure Protocol and Resource Controller","Shared Packet Architecture"], ans:0, exp:"SPARC = Scalable Processor Architecture; it helps reduce complexity and hardware costs in Solaris."},
+
+  // Module 5 — Process Manager
+  {q:"The data structure the OS maintains for every process is called:", choices:["Process Table","Process Control Block (PCB)","Interrupt Handler","CPU Register"], ans:1, exp:"The Process Control Block (PCB), also called the control block, is the data structure the OS maintains for every process."},
+  {q:"Which component of the PCB holds temporary information when an interrupt occurs?", choices:["Process ID","PCB Pointers","CPU Registers","Program Counter"], ans:2, exp:"CPU Registers hold temporary information of the process being halted when an interrupt occurs."},
+  {q:"Which CPU scheduling algorithm is described as 'like FIFO'?", choices:["Round Robin","Priority","FCFS","SJF"], ans:2, exp:"FCFS (First Come, First Serve) is like FIFO — First In, First Out. The first process to arrive is executed first."},
+  {q:"Round Robin scheduling uses a fixed time slot known as:", choices:["Burst time","Priority number","Quantum time","Slice interval"], ans:2, exp:"Round Robin gives a fixed time called 'quantum time' to each job. The process is preempted once it executes for the given time."},
+  {q:"A PWD taking your seat is an example analogy for:", choices:["Non-Preemptive scheduling","FCFS","Preemptive scheduling","Round Robin"], ans:2, exp:"Preemptive scheduling is like a PWD taking your seat — the current process is interrupted and replaced by a higher-priority one."},
+  {q:"In SRTF, what determines which process runs next?", choices:["Arrival order","Longest burst time","Shortest remaining time","Priority number"], ans:2, exp:"SRTF (Shortest Remaining Time First) — the job with the shortest remaining time is scheduled first."},
+  {q:"Which process state comes right before 'Running'?", choices:["New","Terminated","Waiting","Ready"], ans:3, exp:"A process moves from Ready to Running when the scheduler dispatches it. 'Ready' means waiting for the processor."},
+  {q:"The parent process is created:", choices:["After the child processes","During the initial boot process when the OS loads","By the user manually","Before BIOS executes"], ans:1, exp:"Once the initial boot is done and the OS is loaded, it creates an initial parent process. The parent then generates child processes."},
+  {q:"Which PCB component serves as the unique identifier of a process?", choices:["Process Priority","Program Counter","Process ID","CPU Register"], ans:2, exp:"Process ID serves as the unique identifier of each process in the Process Control Block."},
+  {q:"Non-preemptive scheduling can be triggered by:", choices:["An I/O request causing running → waiting","An interrupt causing running → ready","A higher-priority process arriving","I/O completion causing waiting → ready"], ans:0, exp:"Non-preemptive scheduling occurs when a process switches from running to waiting — for example, as a result of an I/O request."}
+];
+
+let current = 0;
+let score = 0;
+let answered = new Array(50).fill(null);
+
+function renderQ() {
+  const q = questions[current];
+  document.getElementById('q-num').textContent = `Question ${current+1} of 50`;
+  document.getElementById('q-text').textContent = q.q;
+  const choiceEl = document.getElementById('choices');
+  choiceEl.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  q.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.innerHTML = `<div class="choice-letter">${letters[i]}</div><div class="choice-text">${c}</div>`;
+    btn.onclick = () => selectAnswer(i);
+    if(answered[current] !== null) {
+      btn.disabled = true;
+      if(i === q.ans) btn.classList.add('correct');
+      if(i === answered[current] && answered[current] !== q.ans) btn.classList.add('wrong');
+    }
+    choiceEl.appendChild(btn);
+  });
+
+  const fb = document.getElementById('q-feedback');
+  if(answered[current] !== null) {
+    fb.className = 'q-feedback show ' + (answered[current] === q.ans ? 'correct' : 'wrong');
+    fb.textContent = (answered[current] === q.ans ? '✓ Correct! ' : '✗ Incorrect. ') + q.exp;
+  } else {
+    fb.className = 'q-feedback';
+  }
+
+  const pct = Math.max(2, Math.round(((current+1)/50)*100));
+  document.getElementById('pbar').style.width = pct+'%';
+  document.getElementById('plab').textContent = `${current+1} / 50`;
+  document.getElementById('btn-prev').disabled = current === 0;
+
+  const isLast = current === 49;
+  const btn = document.getElementById('btn-next');
+  if(isLast && answered[current] !== null) {
+    btn.textContent = 'Finish Quiz ✓';
+    btn.onclick = showResults;
+  } else {
+    btn.textContent = 'Next →';
+    btn.onclick = nextQ;
+  }
+}
+
+function selectAnswer(idx) {
+  if(answered[current] !== null) return;
+  answered[current] = idx;
+  if(idx === questions[current].ans) score++;
+  document.getElementById('score-live').textContent = `Score: ${score}`;
+  renderQ();
+}
+
+function nextQ() {
+  if(current < 49) { current++; renderQ(); }
+}
+function prevQ() {
+  if(current > 0) { current--; renderQ(); }
+}
+
+function showResults() {
+  document.getElementById('quiz-active').style.display = 'none';
+  document.getElementById('quiz-results').style.display = 'block';
+  const pct = Math.round((score/50)*100);
+  const scoreEl = document.getElementById('res-score');
+  scoreEl.textContent = `${score}/50`;
+  scoreEl.style.color = pct >= 75 ? 'var(--green)' : pct >= 50 ? 'var(--amber)' : 'var(--red)';
+  document.getElementById('res-label').textContent = `${pct}% — ${pct >= 90 ? 'Outstanding!' : pct >= 75 ? 'Passed! Great job.' : pct >= 50 ? 'Almost there — review and retry.' : 'Keep studying — you got this!'}`;
+  document.getElementById('res-grade').textContent = `${score} correct answers out of 50 items`;
+
+  const rev = document.getElementById('review-section');
+  let html = '<h3 style="margin-bottom:16px">Answer Review</h3>';
+  questions.forEach((q, i) => {
+    const correct = answered[i] === q.ans;
+    const letters = ['A','B','C','D'];
+    html += `<div class="info-card" style="margin-bottom:12px; border-color: ${correct ? 'rgba(62,207,110,0.3)' : 'rgba(240,96,96,0.3)'}">
+      <div class="title" style="color:${correct ? 'var(--green)' : 'var(--red)'}; font-size:12px; margin-bottom:6px">
+        ${correct ? '✓' : '✗'} Q${i+1}
+      </div>
+      <div style="font-size:14px; color:var(--text); margin-bottom:8px; font-family:'Syne',sans-serif; font-weight:600">${q.q}</div>
+      <div style="font-size:13px; color:var(--green); margin-bottom:4px">Correct: ${letters[q.ans]}. ${q.choices[q.ans]}</div>
+      ${answered[i] !== q.ans && answered[i] !== null ? `<div style="font-size:13px; color:var(--red); margin-bottom:6px">Your answer: ${letters[answered[i]]}. ${q.choices[answered[i]]}</div>` : ''}
+      <div style="font-size:12.5px; color:var(--text3); font-style:italic">${q.exp}</div>
+    </div>`;
+  });
+  rev.innerHTML = html;
+}
+
+function retakeQuiz() {
+  current = 0; score = 0; answered = new Array(50).fill(null);
+  document.getElementById('quiz-active').style.display = 'block';
+  document.getElementById('quiz-results').style.display = 'none';
+  document.getElementById('score-live').textContent = 'Score: 0';
+  renderQ();
+}
+
+renderQ();
+</script>
+</body>
+</html>
