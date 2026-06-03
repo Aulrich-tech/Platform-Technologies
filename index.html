@@ -130,7 +130,7 @@ body {
 /* ═══════════════════════════════════════
    PAGES
 ═══════════════════════════════════════ */
-.page { display: none; padding: 48px 52px 80px; max-width: 860px; }
+.page { display: none; padding: 48px 60px 80px; max-width: 100%; width: 100%; }
 .page.active { display: block; }
 
 /* ═══════════════════════════════════════
@@ -213,7 +213,9 @@ p { margin-bottom: 12px; color: var(--text2); }
 /* ═══════════════════════════════════════
    QUIZ
 ═══════════════════════════════════════ */
-#page-quiz { max-width: 700px; }
+#page-quiz { max-width: 100%; }
+#page-quiz .q-card, #page-quiz .quiz-header, #page-quiz .quiz-nav,
+#page-quiz #quiz-results { max-width: 780px; }
 .quiz-header { margin-bottom: 28px; }
 .quiz-progress { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
 .progress-bar { flex: 1; height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
@@ -283,7 +285,7 @@ p { margin-bottom: 12px; color: var(--text2); }
   .sidebar { display: none; }
   .main { margin-left: 0; padding-top: var(--topbar-h); }
 
-  .page { padding: 32px 36px 80px; }
+  .page { padding: 32px 40px 80px; }
   .two-col { grid-template-columns: 1fr 1fr; }
   .os-grid { grid-template-columns: repeat(2,1fr); }
   .hero-grid { grid-template-columns: repeat(3,1fr); }
