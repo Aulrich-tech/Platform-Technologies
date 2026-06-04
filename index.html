@@ -402,11 +402,11 @@ p { margin-bottom: 12px; color: var(--text2); }
     <div id="page-home" class="page active">
       <div class="hero-tag">Midterm Reviewer · CIT 2301</div>
       <h1>Platform<br><em>Technologies</em></h1>
-      <p class="hero-sub">A complete reviewer covering all 5 modules from the midterm. Study each section, then challenge yourself with the 50-item quiz.</p>
+      <p class="hero-sub">A complete reviewer covering all 5 modules from the midterm. Study each section, then challenge yourself with the 65-item OS Variants quiz.</p>
       <div class="hero-grid">
         <div class="hero-card"><div class="hero-card-num">5</div><div class="hero-card-label">Modules</div></div>
-        <div class="hero-card"><div class="hero-card-num">60</div><div class="hero-card-label">Quiz Items</div></div>
-        <div class="hero-card"><div class="hero-card-num">12</div><div class="hero-card-label">OS Variants</div></div>
+        <div class="hero-card"><div class="hero-card-num">65</div><div class="hero-card-label">Quiz Items</div></div>
+        <div class="hero-card"><div class="hero-card-num">13</div><div class="hero-card-label">OS Variants</div></div>
       </div>
       <button class="start-btn" onclick="showPage('m1')">Start Reviewing →</button>
     </div>
@@ -593,6 +593,8 @@ p { margin-bottom: 12px; color: var(--text2); }
         <div class="os-card"><div class="os-name">Ubuntu OS <span class="pill amber">Canonical</span></div><div class="os-row"><div class="key">Creator</div><div class="val">Mark Shuttleworth (2004)</div></div><div class="os-row"><div class="key">Meaning</div><div class="val">"Ubuntu" = Humanity</div></div><div class="os-row"><div class="key">Company</div><div class="val">Canonical Ltd.</div></div><div class="os-row"><div class="key">Interface</div><div class="val">GNOME, CLI</div></div><div class="os-row"><div class="key">Foundation</div><div class="val">Linux-Based</div></div><div class="os-row"><div class="key">Target</div><div class="val">Programmers, Education, Server, Cybersecurity</div></div><div class="os-row"><div class="key">Versions</div><div class="val">Alphabetical: Adjective + Animal</div></div><div class="os-row"><div class="key">First</div><div class="val">Ubuntu 4.10 Warty Warthog</div></div><div class="os-row"><div class="key">Latest</div><div class="val">Ubuntu 26.04 Resolute Raccoon</div></div></div>
 
         <div class="os-card"><div class="os-name">UNIX OS <span class="pill purple">Foundation</span></div><div class="os-row"><div class="key">Creator</div><div class="val">Ken Thompson &amp; Dennis Ritchie</div></div><div class="os-row"><div class="key">Company</div><div class="val">AT&amp;T (System V)</div></div><div class="os-row"><div class="key">Interface</div><div class="val">CLI, Shell</div></div><div class="os-row"><div class="key">Foundation</div><div class="val">Assembly language → switched to C</div></div><div class="os-row"><div class="key">Target</div><div class="val">Programmers</div></div><div class="os-row"><div class="key">First</div><div class="val">BSD and SVR4 (System V)</div></div><div class="os-row"><div class="key">Note</div><div class="val">Made way for other OS versions</div></div></div>
+
+        <div class="os-card"><div class="os-name">Kali Linux <span class="pill red">Security</span></div><div class="os-row"><div class="key">Developers</div><div class="val">Mati Aharoni &amp; Devon Kearns (Offensive Security)</div></div><div class="os-row"><div class="key">Released</div><div class="val">2013 (successor to BackTrack Linux)</div></div><div class="os-row"><div class="key">Foundation</div><div class="val">Debian-based (Linux Kernel)</div></div><div class="os-row"><div class="key">Interface</div><div class="val">GNOME, KDE Plasma, Xfce</div></div><div class="os-row"><div class="key">Target</div><div class="val">Security professionals, ethical hackers, students</div></div><div class="os-row"><div class="key">Tools</div><div class="val">600+ security tools (Nmap, Wireshark, Metasploit, Burp Suite)</div></div><div class="os-row"><div class="key">Use Cases</div><div class="val">Pen testing, digital forensics, network security, CTF</div></div><div class="os-row"><div class="key">License</div><div class="val">Open-source, free</div></div><div class="os-row"><div class="key">Note</div><div class="val">Can run live from USB; supports ARM/Raspberry Pi</div></div></div>
       </div>
     </div>
 
@@ -658,15 +660,15 @@ p { margin-bottom: 12px; color: var(--text2); }
 
     <!-- QUIZ -->
     <div id="page-quiz" class="page">
-      <div class="section-tag">60-Item Quiz</div>
+      <div class="section-tag">65-Item Quiz — OS Variants</div>
       <h2>Knowledge Check</h2>
-      <p style="color:var(--text2);margin-bottom:28px">Answer all 60 questions covering all modules. Your score is shown at the end.</p>
+      <p style="color:var(--text2);margin-bottom:28px">Answer all 65 questions covering all 13 OS variants — 5 questions each. Your score is shown at the end.</p>
 
       <div id="quiz-active">
         <div class="quiz-header">
           <div class="quiz-progress">
             <div class="progress-bar"><div class="progress-fill" id="pbar" style="width:2%"></div></div>
-            <div class="progress-label" id="plab">1 / 60</div>
+            <div class="progress-label" id="plab">1 / 65</div>
           </div>
           <div id="score-live" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)">Score: 0</div>
         </div>
@@ -826,76 +828,103 @@ function closeDrawer() {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
 const questions = [
-  {q:"What is the mnemonic used to remember the 5 functions of the OS?", choices:["HGDPA","PM DAU","ABCDE","CPU IO"], ans:1, exp:"PM DAU stands for Processor Manager, Memory Storage Manager, Device Manager, Application Interface, User Interface."},
-  {q:"In which generation were transistors introduced to replace vacuum tubes?", choices:["1st Generation","2nd Generation","3rd Generation","4th Generation"], ans:1, exp:"The 2nd Generation replaced vacuum tubes with transistors, which had issues with current leakage."},
-  {q:"Which generation introduced DOS, Linux, UNIX, and Windows?", choices:["2nd Generation","3rd Generation","4th Generation","0th Generation"], ans:2, exp:"The 4th Generation used large-scale integration and introduced DOS, Linux, UNIX, and Windows."},
-  {q:"The 3rd Generation introduced which key concept supporting multiple programs?", choices:["Batch Processing","Multiprogramming","DMA","BIOS"], ans:1, exp:"The 3rd Generation, using silicon chips based on IC, supported Multiprogramming."},
-  {q:"Which OS type controls machinery, scientific instruments, and industrial systems?", choices:["Multiuser","Real Time","Single User Multitask","Batch"], ans:1, exp:"Real-Time OS is designed for medical devices, robotics, and avionics — controlling machinery and scientific instruments."},
-  {q:"Windows Server, Linux, and UNIX are examples of which type of OS?", choices:["Real Time","Single User Single Task","Multiuser","Single User Multitask"], ans:2, exp:"Multiuser OS allows multiple users to simultaneously use the resources on a single computer."},
-  {q:"PDAs (Personal Digital Assistants) are an example of which OS type?", choices:["Real Time","Single User, Single Task","Single User, Multitask","Multiuser"], ans:1, exp:"Single User, Single Task OS allows one user to do only one thing at a time — like PDAs."},
-  {q:"The User Interface function of the OS uses shells in which operating system?", choices:["Windows","Macintosh","Unix","Android"], ans:2, exp:"Unix uses shells for its User Interface, while Windows and Macintosh use GUIs."},
-  {q:"Which function of the OS prevents one process from using another's memory?", choices:["Device Manager","Processor Manager","Memory Storage Management","Application Interface"], ans:2, exp:"Memory Storage Management ensures each process has enough memory AND that one process doesn't use another's allocated memory."},
-  {q:"Vacuum tubes were introduced in which OS generation?", choices:["0th Generation","1st Generation","2nd Generation","3rd Generation"], ans:1, exp:"The 1st Generation introduced vacuum tubes, replacing mechanical machines, but no OS existed yet."},
-  {q:"What does BIOS stand for?", choices:["Basic Input/Output System","Boot Initialization Operating System","Binary I/O Structure","Basic Integrated OS Software"], ans:0, exp:"BIOS = Basic Input/Output System. It's pre-installed, low-level firmware on the motherboard."},
-  {q:"What is the correct order in the boot-up sequence?", choices:["BIOS → Boot Sector → Bootable Device → CPU","CPU → BIOS → Bootable Device → Boot Sector → Kernel","Boot Sector → BIOS → CPU → Kernel","Kernel → BIOS → Boot Sector → CPU"], ans:1, exp:"CPU executes BIOS → checks devices → BIOS finds bootable device → loads Boot Sector → Boot Sector loads OS Kernel."},
-  {q:"The OS Kernel is best described as:", choices:["The BIOS firmware","The core program at the heart of the OS","The Boot Sector","A device driver"], ans:1, exp:"The OS Kernel is the core program at the heart of a computer's operating system."},
-  {q:"An interrupt that comes from an external device is called:", choices:["Software Interrupt","Trap","Exception","Hardware Interrupt"], ans:3, exp:"A Hardware Interrupt occurs when the signal for the processor is from an external device."},
-  {q:"A software-generated interruption caused by an error or user program request is called:", choices:["Hardware Interrupt","DMA Signal","Trap or Exception","Kernel Panic"], ans:2, exp:"A Trap or Exception is a software-generated interruption — a fault or access violation generated by the processor."},
-  {q:"What component manages the interrupt queue in the OS?", choices:["Device Driver","Interrupt Handler","Device Controller","Boot Sector"], ans:1, exp:"The Interrupt Handler is included in the OS; it prioritizes interrupts and saves them in a queue if more than one is waiting."},
-  {q:"In Direct Memory Access (DMA), how many interrupts are generated per block transfer?", choices:["One per byte","One per block","Two per block","None"], ans:1, exp:"DMA generates only ONE interrupt per block to tell the device driver the operation has completed."},
-  {q:"Which storage type is Volatile?", choices:["Magnetic Tape","Optical Disk","RAM","Magnetic Disk"], ans:2, exp:"RAM is volatile — it loses its content when power is removed."},
-  {q:"In the storage hierarchy, which is the fastest and smallest?", choices:["Cache","RAM","Main Memory","Registers"], ans:3, exp:"Registers are the smallest, fastest, and most expensive — at the very top of the storage hierarchy."},
-  {q:"Which storage medium has the largest capacity but slowest access?", choices:["RAM","Cache","Electronic Disk","Magnetic Tapes"], ans:3, exp:"Magnetic Tapes are at the bottom of the hierarchy: largest, cheapest (most cost per bit), and slowest."},
-  {q:"In Interrupt-Driven I/O, who informs the device driver that the operation is finished?", choices:["CPU","Device Driver itself","Device Controller","OS Kernel"], ans:2, exp:"In step 3, the Device Controller informs the Device Driver via interrupt once the data transfer is complete."},
-  {q:"What is the main advantage of DMA over Interrupt-Driven I/O?", choices:["It is cheaper","The CPU is free to do other tasks during transfer","It uses less memory","It generates more interrupts"], ans:1, exp:"During DMA, the CPU is available to accomplish other tasks while the device controller handles the entire block transfer."},
-  {q:"In Static Partitioning, each partition stores:", choices:["Multiple processes","Only one process","As many as fit","Two processes max"], ans:1, exp:"Static Partitioning uses fixed-size partitions that cannot be changed and can store only one process each."},
-  {q:"Which allocation technique starts searching from the last allocated hole?", choices:["First Fit","Best Fit","Next Fit","Worst Fit"], ans:2, exp:"Next Fit is the same as First Fit, but always starts searching from the last allocated hole."},
-  {q:"Which allocation technique allocates the smallest hole that is big enough?", choices:["First Fit","Next Fit","Best Fit","Worst Fit"], ans:2, exp:"Best Fit allocates the smallest hole that is sufficient for the process."},
-  {q:"Compaction solves memory fragmentation by:", choices:["Dividing memory into fixed partitions","Moving free space to create one large block","Swapping processes to secondary memory","Allocating the largest hole"], ans:1, exp:"Compaction shuffles memory content so all free space comes together in one large block."},
-  {q:"A problem with Compaction is that relocation must be done at:", choices:["Assembly time","Load time","Execution time (dynamic)","Compile time"], ans:2, exp:"Compaction requires dynamic relocation done at execution time — it cannot be done at static, assembly, or load time."},
-  {q:"In Swapping, what happens to a process when it goes for I/O wait?", choices:["It terminates","It swaps out to secondary memory","It stays in main memory","It is deleted"], ans:1, exp:"When a process goes for I/O wait, it is temporarily swapped out to secondary memory and swapped back after I/O."},
-  {q:"In Dynamic Partitioning, the partition size is determined by:", choices:["The OS administrator","A fixed pre-defined value","The size of the arriving process","The CPU speed"], ans:2, exp:"Dynamic Partitioning uses a variable-size scheme where partition size is determined by the arriving process's size."},
-  {q:"Which allocation technique allocates the largest available hole?", choices:["First Fit","Next Fit","Best Fit","Worst Fit"], ans:3, exp:"Worst Fit allocates the largest available hole in memory."},
-  {q:"Bayanihan OS was created by which Philippine government agency?", choices:["DICT","DOST","CHED","DTI"], ans:1, exp:"Bayanihan OS was created by ASTI (Advanced Science and Technology Institute) under DOST in 2001."},
-  {q:"Debian OS versions are named after characters from:", choices:["Star Wars","Harry Potter","Pixar's Toy Story","Marvel Comics"], ans:2, exp:"Debian versions are named after Pixar Toy Story characters (e.g., Buzz, Trixie)."},
-  {q:"Who created Linux OS?", choices:["Dennis Ritchie","Ken Thompson","Ian Murdock","Linus Torvalds"], ans:3, exp:"Linus Torvalds created Linux in 1991. His mascot is Tux (after getting bitten by a penguin)."},
-  {q:"What does 'Ubuntu' mean?", choices:["Power","Humanity","Freedom","Community"], ans:1, exp:"Ubuntu means 'Humanity' — it was created by Mark Shuttleworth in 2004."},
-  {q:"Mac OS version names are currently based on:", choices:["Big Cats","US Landmarks","Planets","Ocean Cities"], ans:1, exp:"Mac OS versions were originally named after Big Cats but now use US Landmarks (e.g., Tahoe)."},
-  {q:"Which OS was created after US trade restrictions affected Huawei?", choices:["Hyper OS","Chrome OS","Harmony OS","Solaris OS"], ans:2, exp:"Harmony OS was created by Huawei after US trade restrictions prevented them from using other OS platforms."},
-  {q:"UNIX was created by:", choices:["Linus Torvalds and Andy Rubin","Ken Thompson and Dennis Ritchie","Mark Shuttleworth and Ian Murdock","Warren Togami and Lei Jun"], ans:1, exp:"UNIX was created by Ken Thompson and Dennis Ritchie at AT&T."},
-  {q:"Fedora OS uses which package manager?", choices:["APT","Homebrew","RPM Fusion / Flathub","Snap"], ans:2, exp:"Fedora uses RPM Fusion as its package manager; applications are downloaded from Flathub."},
-  {q:"The first version of Linux was named:", choices:["Tux","Penguin","FreaX","LinuxOS"], ans:2, exp:"The first version of Linux was named 'FreaX' — combining Free, Freak, and Unix."},
-  {q:"Solaris OS was originally called:", choices:["OpenSolaris","SunOS","SPARC OS","Oracle Unix"], ans:1, exp:"Solaris was originally called SunOS in 1983 by Sun Microsystems, later renamed Solaris 2 in 1992."},
-  {q:"What does Gatekeeper and File Vault refer to?", choices:["Solaris security tools","Fedora package tools","Mac OS exclusive security features","Linux kernel modules"], ans:2, exp:"Gatekeeper and File Vault are security features exclusive to Apple, found in all Mac OS versions."},
-  {q:"Hyper OS replaced which previous Xiaomi OS?", choices:["EMUI","One UI","MIUI","ColorOS"], ans:2, exp:"Hyper OS was created by Lei Jun (Xiaomi CEO) in 2023 as a replacement for MIUI."},
-  {q:"Ubuntu's versioning scheme uses which format?", choices:["Sequential numbers","Random codenames","Alphabetical: Adjective + Animal","Year + Country"], ans:2, exp:"Ubuntu versions use an alphabetical scheme pairing an adjective with an animal (e.g., Warty Warthog, Resolute Raccoon)."},
-  {q:"SPARC in Solaris OS stands for:", choices:["Scalable Processor Architecture","Simple Parallel Access Runtime Core","Secure Protocol and Resource Controller","Shared Packet Architecture"], ans:0, exp:"SPARC = Scalable Processor Architecture; it helps reduce complexity and hardware costs in Solaris."},
-  {q:"The data structure the OS maintains for every process is called:", choices:["Process Table","Process Control Block (PCB)","Interrupt Handler","CPU Register"], ans:1, exp:"The Process Control Block (PCB), also called the control block, is the data structure the OS maintains for every process."},
-  {q:"Which component of the PCB holds temporary information when an interrupt occurs?", choices:["Process ID","PCB Pointers","CPU Registers","Program Counter"], ans:2, exp:"CPU Registers hold temporary information of the process being halted when an interrupt occurs."},
-  {q:"Which CPU scheduling algorithm is described as 'like FIFO'?", choices:["Round Robin","Priority","FCFS","SJF"], ans:2, exp:"FCFS (First Come, First Serve) is like FIFO — First In, First Out. The first process to arrive is executed first."},
-  {q:"Round Robin scheduling uses a fixed time slot known as:", choices:["Burst time","Priority number","Quantum time","Slice interval"], ans:2, exp:"Round Robin gives a fixed time called 'quantum time' to each job. The process is preempted once it executes for the given time."},
-  {q:"A PWD taking your seat is an example analogy for:", choices:["Non-Preemptive scheduling","FCFS","Preemptive scheduling","Round Robin"], ans:2, exp:"Preemptive scheduling is like a PWD taking your seat — the current process is interrupted and replaced by a higher-priority one."},
-  {q:"In SRTF, what determines which process runs next?", choices:["Arrival order","Longest burst time","Shortest remaining time","Priority number"], ans:2, exp:"SRTF (Shortest Remaining Time First) — the job with the shortest remaining time is scheduled first."},
-  {q:"Which process state comes right before 'Running'?", choices:["New","Terminated","Waiting","Ready"], ans:3, exp:"A process moves from Ready to Running when the scheduler dispatches it. 'Ready' means waiting for the processor."},
-  {q:"The parent process is created:", choices:["After the child processes","During the initial boot process when the OS loads","By the user manually","Before BIOS executes"], ans:1, exp:"Once the initial boot is done and the OS is loaded, it creates an initial parent process. The parent then generates child processes."},
-  {q:"Which PCB component serves as the unique identifier of a process?", choices:["Process Priority","Program Counter","Process ID","CPU Register"], ans:2, exp:"Process ID serves as the unique identifier of each process in the Process Control Block."},
-  {q:"Non-preemptive scheduling can be triggered by:", choices:["An I/O request causing running → waiting","An interrupt causing running → ready","A higher-priority process arriving","I/O completion causing waiting → ready"], ans:0, exp:"Non-preemptive scheduling occurs when a process switches from running to waiting — for example, as a result of an I/O request."},
-  {q:"Which type of OS is designed to control robotics and avionics?", choices:["Multiuser OS","Batch OS","Real-Time OS","Single User, Single Task"], ans:2, exp:"Real-Time OS is used for medical devices, robotics, and avionics — systems that require immediate processing."},
-  {q:"What does BIOS stand for?", choices:["Boot Input Operating System","Basic Input/Output System","Binary Integrated OS Software","Base Instruction Output Structure"], ans:1, exp:"BIOS = Basic Input/Output System. It is pre-installed, low-level firmware stored on the motherboard."},
-  {q:"Which OS is the foundation that Linux, Mac OS, and Solaris are all based on?", choices:["Windows NT","BSD","UNIX","Fedora Core"], ans:2, exp:"UNIX, created by Ken Thompson and Dennis Ritchie at AT&T, is the foundational OS that Linux, Mac OS, and Solaris are based on."},
-  {q:"Debian OS was named after its creator Ian Murdock and his wife. What is her name?", choices:["Diana","Debra","Donna","Delia"], ans:1, exp:"Debian = Ian + Debra (his wife). Ian Murdock created Debian on August 15, 1993."},
-  {q:"Which memory management technique is expensive and must be performed at execution time?", choices:["Static Partitioning","Swapping","Best Fit Allocation","Compaction"], ans:3, exp:"Compaction is expensive because it requires dynamic relocation at execution time — it cannot be done at assembly, compile, or load time."},
-  {q:"Chrome OS targets which group of users?", choices:["Power Users and Gamers","Medical Professionals","Students and Teachers","Government Employees"], ans:2, exp:"Chrome OS, created by Google in 2008, is designed for students and teachers. Chromium OS is the free open-source version."},
-  {q:"What analogy best describes Round Robin scheduling?", choices:["A PWD taking your seat","Serving pizza slices to everyone in rotation","The shortest queue at a bank","A judge setting case priority"], ans:1, exp:"Round Robin is like distributing pizza slices — each process gets a fixed quantum time before moving to the next in the queue."},
-  {q:"Which PCB component points to the next instruction the CPU will execute?", choices:["Process ID","Process State","CPU Registers","Program Counter"], ans:3, exp:"The Program Counter stores a pointer to the address of the next instruction that will be executed by the CPU."},
-  {q:"SJF scheduling selects the process based on:", choices:["Arrival order","Shortest remaining time","Smallest burst/duration time","Highest priority number"], ans:2, exp:"SJF (Shortest Job First) — the job with the smallest burst (duration) time is scheduled and executed first. It is non-preemptive."}
+  /* ── ANDROID (Q1–5) ── */
+  {q:"Who originally created Android OS?", choices:["Larry Page","Andy Rubin","Linus Torvalds","Mark Shuttleworth"], ans:1, exp:"Android was created by Andy Rubin. Google then acquired Android Inc. in 2005."},
+  {q:"Which company acquired Android in 2005?", choices:["Microsoft","Apple","Google","Samsung"], ans:2, exp:"Google acquired Android Inc. in 2005, and has developed and maintained the OS since then."},
+  {q:"What is the kernel foundation of Android OS?", choices:["Windows NT Kernel","UNIX Kernel","Linux Kernel","BSD Kernel"], ans:2, exp:"Android OS is built on top of the Linux Kernel, adapted for mobile use."},
+  {q:"Android OS is primarily designed to target which group of users?", choices:["Server Administrators","Desktop Power Users","Mobile Users","Security Professionals"], ans:2, exp:"Android targets mobile users and is designed to run on smartphones, tablets, and similar mobile devices."},
+  {q:"Which of the following best describes Android's licensing model?", choices:["Proprietary, paid license","Open-source under Apache/Linux license","Closed-source freeware","Shareware"], ans:1, exp:"Android is open-source. Its core is released under the Apache License, and it is built on the open-source Linux Kernel."},
+
+  /* ── BAYANIHAN OS (Q6–10) ── */
+  {q:"What Philippine government agency developed Bayanihan OS?", choices:["DICT","DOST / ASTI","NTC","COMELEC"], ans:1, exp:"Bayanihan OS was developed by ASTI (Advanced Science and Technology Institute) under DOST (Department of Science and Technology)."},
+  {q:"Bayanihan OS is based on which Linux distribution?", choices:["Red Hat","Fedora","Ubuntu","Debian"], ans:3, exp:"Bayanihan OS is Debian-based, making it part of the Debian family of Linux distributions."},
+  {q:"What is the primary target audience of Bayanihan OS?", choices:["Philippine military","Filipino schools, government offices, and institutions","Private corporations only","Game developers"], ans:1, exp:"Bayanihan OS was designed for Filipino schools, government offices, and public institutions."},
+  {q:"What was the latest version of Bayanihan Linux and when was it released?", choices:["Bayanihan v3.0 (2005)","Bayanihan Linux v5.4 released April 25, 2011","Bayanihan v7.1 (2018)","Bayanihan v2.0 (2001)"], ans:1, exp:"The latest version is Bayanihan Linux v5.4, released on April 25, 2011."},
+  {q:"Which feature of Bayanihan OS provides compatibility with Windows file sharing?", choices:["Wine","VirtualBox","Samba","CrossOver"], ans:2, exp:"Bayanihan OS includes Samba, which enables compatibility and file sharing with Windows-based systems."},
+
+  /* ── CHROME OS (Q11–15) ── */
+  {q:"Chrome OS was officially created by which company and in what year?", choices:["Microsoft in 2006","Apple in 2007","Google in 2008","IBM in 2005"], ans:2, exp:"Chrome OS was created by Google and officially announced in July 2008."},
+  {q:"What is Chromium OS?", choices:["A paid enterprise version of Chrome OS","The free, open-source version of Chrome OS released in 2009","A variant designed for servers","A Google mobile OS"], ans:1, exp:"Chromium OS is the free and open-source version of Chrome OS, released in 2009. Chrome OS is the commercial version built on it."},
+  {q:"Chrome OS is primarily designed for which group of users?", choices:["Server administrators","Power users and gamers","Students and teachers","Government security analysts"], ans:2, exp:"Chrome OS is designed specifically for students and teachers, focusing on simplicity and web-based workflows."},
+  {q:"What kernel is Chrome OS built on?", choices:["Windows NT","BSD","UNIX","Linux Kernel"], ans:3, exp:"Like Android, Chrome OS is built on the Linux Kernel."},
+  {q:"Which browser is central to the Chrome OS experience?", choices:["Firefox","Safari","Google Chrome","Microsoft Edge"], ans:2, exp:"Google Chrome is the core browser and the primary application interface for Chrome OS — most apps run in or through it."},
+
+  /* ── DEBIAN OS (Q16–20) ── */
+  {q:"Who created Debian OS and when?", choices:["Mark Shuttleworth in 2004","Ian Murdock on August 15, 1993","Warren Togami in 2002","Linus Torvalds in 1991"], ans:1, exp:"Debian was created by Ian Murdock on August 15, 1993."},
+  {q:"How did the name 'Debian' originate?", choices:["It is an acronym for Distributed Enterprise Base for Internet Access and Networks","A combination of Ian (its creator) and Debra (his wife)","Named after a city in Germany","Named after the Debian Foundation's first chairman"], ans:1, exp:"Debian = Ian + Debra. It was named after its creator Ian Murdock and his wife Debra."},
+  {q:"What organization sponsors Debian OS?", choices:["Red Hat","Canonical Ltd.","FSF's GNU Project","Oracle"], ans:2, exp:"Debian is sponsored by the Free Software Foundation's (FSF) GNU Project."},
+  {q:"Debian version codenames are based on characters from which franchise?", choices:["Star Wars","Harry Potter","Pixar's Toy Story","Marvel Comics"], ans:2, exp:"Debian versions are named after characters from Pixar's Toy Story (e.g., Buzz, Woody, Jessie, Trixie)."},
+  {q:"What is the default desktop environment in Debian OS?", choices:["KDE Plasma","Xfce","Cinnamon","GNOME"], ans:3, exp:"GNOME is the default desktop environment in Debian, though it also supports KDE Plasma, Xfce, and Cinnamon."},
+
+  /* ── FEDORA OS (Q21–25) ── */
+  {q:"Who created Fedora OS and in what year?", choices:["Ian Murdock in 1993","Linus Torvalds in 1991","Warren Togami in 2002","Mark Shuttleworth in 2004"], ans:2, exp:"Fedora OS was created by Warren Togami in 2002."},
+  {q:"Which company backs and maintains Fedora OS?", choices:["Canonical","Oracle","Microsoft","Red Hat"], ans:3, exp:"Fedora OS is backed by Red Hat, which also produces Red Hat Enterprise Linux (RHEL)."},
+  {q:"What was the name of the very first Fedora release?", choices:["Fedora One","Fedora Linux 1.0","Fedora Core 1","Fedora Alpha"], ans:2, exp:"The first release of Fedora was called Fedora Core 1."},
+  {q:"Which package manager is associated with Fedora OS for third-party software?", choices:["APT","Flatpak / RPM Fusion from Flathub","Snap","Homebrew"], ans:1, exp:"Fedora uses RPM Fusion and allows apps from Flathub via Flatpak for third-party software installation."},
+  {q:"Which desktop environments are supported by Fedora OS?", choices:["Only GNOME","GNOME, KDE Plasma, and Xfce","Only KDE Plasma","GNOME and macOS Aqua"], ans:1, exp:"Fedora supports GNOME, KDE Plasma, and Xfce as desktop environments."},
+
+  /* ── HARMONY OS (Q26–30) ── */
+  {q:"Which company developed Harmony OS?", choices:["Xiaomi","Samsung","Huawei","Oppo"], ans:2, exp:"Harmony OS was developed by Huawei as an alternative OS after facing US trade restrictions."},
+  {q:"Why did Huawei develop Harmony OS?", choices:["To compete with Android in gaming","To replace MIUI on their phones","As a response to US trade restrictions limiting access to Google/Android services","To target Western markets"], ans:2, exp:"Huawei developed Harmony OS after US trade restrictions cut them off from using Google's Android services."},
+  {q:"Harmony OS primarily targets users in which region?", choices:["Southeast Asia","Western Europe","North America","Mainland China"], ans:3, exp:"Harmony OS is primarily targeted at mainland Chinese users, though Huawei is expanding its international reach."},
+  {q:"Which types of interfaces does Harmony OS support?", choices:["Desktop only","Mobile only","Desktop, Mobile, Tablet, and Distributed interfaces","Server interfaces only"], ans:2, exp:"Harmony OS supports Desktop, Mobile, Tablet, and Distributed device interfaces — designed for cross-device ecosystems."},
+  {q:"Harmony OS is positioned as an alternative to which dominant mobile OS?", choices:["iOS","Windows Mobile","Android","BlackBerry OS"], ans:2, exp:"Harmony OS was developed as Huawei's alternative to Android after being restricted from using Google's Android OS."},
+
+  /* ── HYPER OS (Q31–35) ── */
+  {q:"Who created Hyper OS and in what year?", choices:["Andy Rubin in 2019","Lei Jun (Xiaomi CEO) in 2023","Ren Zhengfei in 2022","Tim Cook in 2023"], ans:1, exp:"Hyper OS was created by Lei Jun, Xiaomi's CEO, in 2023."},
+  {q:"Which company developed and released Hyper OS?", choices:["Huawei","Oppo","Samsung","Xiaomi Inc."], ans:3, exp:"Hyper OS was developed and released by Xiaomi Inc."},
+  {q:"Hyper OS was created as a replacement for which previous OS?", choices:["EMUI","One UI","ColorOS","MIUI"], ans:3, exp:"Hyper OS replaced MIUI, which was Xiaomi's previous custom Android-based mobile OS."},
+  {q:"Hyper OS is primarily targeted at which type of users?", choices:["Students and Teachers","Medical Professionals","Power Users","Government Employees"], ans:2, exp:"Hyper OS is designed for power users who want more advanced controls and customization over their devices."},
+  {q:"Hyper OS is developed by the same company that makes which line of smartphones?", choices:["Pixel","Galaxy","Redmi / Xiaomi phones","P-series (Huawei)"], ans:2, exp:"Hyper OS runs on Xiaomi's Redmi and Xiaomi-branded devices, as it is developed by Xiaomi Inc."},
+
+  /* ── LINUX OS (Q36–40) ── */
+  {q:"Who created Linux OS and in what year?", choices:["Dennis Ritchie in 1969","Ken Thompson in 1970","Linus Torvalds in 1991","Ian Murdock in 1993"], ans:2, exp:"Linus Torvalds created Linux in 1991 while a student. He named the mascot Tux after being bitten by a penguin."},
+  {q:"What was the original name of Linux before it was called Linux?", choices:["Linus","GNU/Hurd","FreaX (Free, Freak, Unix)","OpenBSD"], ans:2, exp:"Linux was originally called FreaX — a combination of Free, Freak, and Unix. It was renamed Linux by the FTP server's admin."},
+  {q:"Which companies are noted supporters of Linux OS?", choices:["Apple, Samsung, Sony","IBM, Oracle, Compaq","Google, Facebook, Twitter","Microsoft, HP, Dell"], ans:1, exp:"IBM, Oracle, and Compaq are notable corporate supporters of the Linux OS."},
+  {q:"What is Linux's mascot and why was it chosen?", choices:["A fox, because it is clever","A penguin named Tux, because Linus Torvalds was once bitten by a penguin","A dragon, symbol of open-source power","A gnu, representing GNU/Linux"], ans:1, exp:"Linux's mascot is Tux, a penguin — chosen because Linus Torvalds was bitten by a penguin at a zoo."},
+  {q:"Which package managers are associated with Linux OS?", choices:["APT only","RPM only","Dandified YUM (DNF) and APT","Chocolatey and Homebrew"], ans:2, exp:"Linux commonly uses Dandified YUM (DNF) and APT (Advanced Package Tool) as package managers."},
+
+  /* ── MAC OS (Q41–45) ── */
+  {q:"What company develops and maintains Mac OS?", choices:["Microsoft","Google","Apple Inc.","IBM"], ans:2, exp:"Mac OS is developed and maintained by Apple Inc."},
+  {q:"Mac OS is based on which foundational OS architecture?", choices:["Windows NT","Linux Kernel","UNIX","BSD exclusively"], ans:2, exp:"Mac OS is UNIX-based, inheriting stability and security principles from UNIX."},
+  {q:"Mac OS versions were originally named after Big Cats, then switched to naming after what?", choices:["Planets","US Landmarks","Countries","Greek gods"], ans:1, exp:"Mac OS first used Big Cat names (e.g., Leopard, Lion), then switched to US Landmarks (e.g., Yosemite, Sequoia, Tahoe)."},
+  {q:"Which security features are exclusive to Mac OS?", choices:["BitLocker and Windows Defender","Gatekeeper and FileVault","SELinux and AppArmor","Firewall and Antivirus Pro"], ans:1, exp:"Gatekeeper and FileVault are Apple-exclusive security features found in Mac OS for app authentication and disk encryption."},
+  {q:"Which of the following is a UI component found in Mac OS?", choices:["Start Menu and Taskbar","Control Panel","Menu Bar, Dock, Finder, and Mission Control","Cortana and Action Center"], ans:2, exp:"Mac OS uses the Menu Bar, Dock, Finder, Control Center, and Mission Control as its key interface components."},
+
+  /* ── SOLARIS OS (Q46–50) ── */
+  {q:"What was Solaris OS originally called and when was it created?", choices:["Oracle Unix (1990)","SunOS (1983) by Sun Microsystems","SPARC OS (1980) by AT&T","BSD/Solaris (1985) by Bell Labs"], ans:1, exp:"Solaris was originally called SunOS, developed by Sun Microsystems in 1983. It was renamed Solaris 2 in 1992."},
+  {q:"What does SPARC stand for in the context of Solaris OS?", choices:["Scalable Processor Architecture","Simple Parallel Access Runtime Core","Secure Protocol and Resource Controller","Shared Packet Architecture for RISC Computing"], ans:0, exp:"SPARC = Scalable Processor Architecture. It helps reduce hardware complexity and costs in Solaris systems."},
+  {q:"Which OS shares the SMP (Symmetric Multi-Processing) feature with Solaris?", choices:["Android","Chrome OS","Mac OS","Bayanihan OS"], ans:2, exp:"SMP (Symmetric Multi-Processing) is a feature used by both Solaris OS and Mac OS."},
+  {q:"Who currently owns and maintains Solaris OS?", choices:["Sun Microsystems","IBM","Oracle","AT&T"], ans:2, exp:"Oracle acquired Sun Microsystems in 2010 and now owns and maintains Oracle Solaris 11."},
+  {q:"What is the kernel foundation of Solaris OS?", choices:["Linux Kernel","BSD","UNIX-based System-V","Windows NT"], ans:2, exp:"Solaris is based on UNIX System-V, making it a System V-derived UNIX operating system."},
+
+  /* ── UBUNTU OS (Q51–55) ── */
+  {q:"Who created Ubuntu OS and in what year?", choices:["Ian Murdock in 1993","Linus Torvalds in 1991","Warren Togami in 2002","Mark Shuttleworth in 2004"], ans:3, exp:"Ubuntu was created by Mark Shuttleworth in 2004 and is maintained by Canonical Ltd."},
+  {q:"What does the word 'Ubuntu' mean?", choices:["Freedom","Power","Humanity","Community"], ans:2, exp:"'Ubuntu' is an African word meaning 'Humanity' — reflecting the OS's philosophy of sharing and community."},
+  {q:"Ubuntu version names follow which naming scheme?", choices:["Sequential numbers only","Year + Country","Alphabetical pairing of Adjective + Animal","Random codenames"], ans:2, exp:"Ubuntu uses an alphabetical scheme pairing an adjective with an animal (e.g., Warty Warthog, Resolute Raccoon)."},
+  {q:"What was the very first Ubuntu release?", choices:["Ubuntu 1.0 Noble Numbat","Ubuntu 4.10 Warty Warthog","Ubuntu 6.06 Dapper Drake","Ubuntu 10.04 Lucid Lynx"], ans:1, exp:"The first Ubuntu release was Ubuntu 4.10 Warty Warthog, released in October 2004."},
+  {q:"Which company officially maintains and sponsors Ubuntu OS?", choices:["Red Hat","IBM","Oracle","Canonical Ltd."], ans:3, exp:"Ubuntu is maintained and sponsored by Canonical Ltd., the company founded by Mark Shuttleworth."},
+
+  /* ── UNIX OS (Q56–60) ── */
+  {q:"Who created UNIX OS?", choices:["Mark Shuttleworth and Ian Murdock","Linus Torvalds and Warren Togami","Ken Thompson and Dennis Ritchie","Andy Rubin and Larry Page"], ans:2, exp:"UNIX was created by Ken Thompson and Dennis Ritchie at AT&T Bell Labs."},
+  {q:"What company is associated with UNIX System V (SVR4)?", choices:["IBM","Apple","AT&T","Sun Microsystems"], ans:2, exp:"AT&T developed UNIX System V (SVR4). The AT&T version is the foundation of most commercial UNIX variants."},
+  {q:"UNIX was originally written in Assembly language and then rewritten in which language?", choices:["Python","Java","FORTRAN","C"], ans:3, exp:"UNIX was originally coded in Assembly language and later rewritten in C by Dennis Ritchie, making it more portable."},
+  {q:"Which OS variants are directly based on UNIX?", choices:["Android and Chrome OS","Windows and DOS","Linux, Mac OS, and Solaris","Fedora and Ubuntu only"], ans:2, exp:"Linux, Mac OS, and Solaris are all directly based on UNIX — it 'made way for other OS versions.'"},
+  {q:"What were the two original UNIX distributions?", choices:["Fedora and Debian","BSD and SVR4 (System V)","Red Hat and Ubuntu","GNOME and KDE"], ans:1, exp:"The two original UNIX distributions are BSD (Berkeley Software Distribution) and SVR4 (System V Release 4)."},
+
+  /* ── KALI LINUX (Q61–65) ── */
+  {q:"Who developed Kali Linux and which organization maintains it?", choices:["Linus Torvalds; Linux Foundation","Ian Murdock; Debian Project","Mati Aharoni and Devon Kearns; Offensive Security","Mark Shuttleworth; Canonical Ltd."], ans:2, exp:"Kali Linux was developed by Mati Aharoni and Devon Kearns and is developed and maintained by Offensive Security."},
+  {q:"Kali Linux was released in 2013 as the successor to which OS?", choices:["Ubuntu Server","BackTrack Linux","Fedora Security Lab","Parrot OS"], ans:1, exp:"Kali Linux was released in 2013 as the successor to BackTrack Linux, inheriting and expanding its security toolset."},
+  {q:"Approximately how many cybersecurity tools come preloaded in Kali Linux?", choices:["Over 100","Over 200","Over 400","Over 600"], ans:3, exp:"Kali Linux ships with over 600 preloaded cybersecurity and penetration testing tools, including Nmap, Metasploit, Wireshark, and Burp Suite."},
+  {q:"Which of the following is NOT a use case for Kali Linux?", choices:["Penetration Testing","Digital Forensics","CTF Competitions","Running everyday productivity apps as a desktop OS"], ans:3, exp:"Kali Linux is purpose-built for security tasks. It is not desktop-friendly for everyday productivity use — it lacks multimedia and productivity apps by design."},
+  {q:"Kali Linux is based on which Linux distribution?", choices:["Red Hat / Fedora","Arch Linux","Debian","Ubuntu"], ans:2, exp:"Kali Linux is Debian-based, inheriting Debian's stability and package management via APT."}
 ];
 
-let current = 0, score = 0, answered = new Array(60).fill(null);
+let current = 0, score = 0, answered = new Array(65).fill(null);
 
 function renderQ() {
   const q = questions[current];
-  document.getElementById('q-num').textContent = 'Question ' + (current + 1) + ' of 60';
+  document.getElementById('q-num').textContent = 'Question ' + (current + 1) + ' of 65';
   document.getElementById('q-text').textContent = q.q;
   const choiceEl = document.getElementById('choices');
   choiceEl.innerHTML = '';
@@ -919,11 +948,11 @@ function renderQ() {
   } else {
     fb.className = 'q-feedback';
   }
-  const pct = Math.max(2, Math.round(((current + 1) / 60) * 100));
+  const pct = Math.max(2, Math.round(((current + 1) / 65) * 100));
   document.getElementById('pbar').style.width = pct + '%';
-  document.getElementById('plab').textContent = (current + 1) + ' / 60';
+  document.getElementById('plab').textContent = (current + 1) + ' / 65';
   document.getElementById('btn-prev').disabled = current === 0;
-  const isLast = current === 59;
+  const isLast = current === 64;
   const btn = document.getElementById('btn-next');
   if (isLast && answered[current] !== null) {
     btn.textContent = 'Finish Quiz ✓';
@@ -942,18 +971,18 @@ function selectAnswer(idx) {
   renderQ();
 }
 
-function nextQ() { if (current < 59) { current++; renderQ(); } }
+function nextQ() { if (current < 64) { current++; renderQ(); } }
 function prevQ() { if (current > 0) { current--; renderQ(); } }
 
 function showResults() {
   document.getElementById('quiz-active').style.display = 'none';
   document.getElementById('quiz-results').style.display = 'block';
-  const pct = Math.round((score / 60) * 100);
+  const pct = Math.round((score / 65) * 100);
   const sEl = document.getElementById('res-score');
-  sEl.textContent = score + '/60';
+  sEl.textContent = score + '/65';
   sEl.style.color = pct >= 75 ? 'var(--green)' : pct >= 50 ? 'var(--amber)' : 'var(--red)';
   document.getElementById('res-label').textContent = pct + '% — ' + (pct >= 90 ? 'Outstanding!' : pct >= 75 ? 'Passed! Great job.' : pct >= 50 ? 'Almost there — review and retry.' : 'Keep studying — you got this!');
-  document.getElementById('res-grade').textContent = score + ' correct answers out of 60 items';
+  document.getElementById('res-grade').textContent = score + ' correct answers out of 65 items';
   const rev = document.getElementById('review-section');
   const L = ['A', 'B', 'C', 'D'];
   let html = '<h3 style="margin-bottom:16px">Answer Review</h3>';
@@ -972,7 +1001,7 @@ function showResults() {
 }
 
 function retakeQuiz() {
-  current = 0; score = 0; answered = new Array(60).fill(null);
+  current = 0; score = 0; answered = new Array(65).fill(null);
   document.getElementById('quiz-active').style.display = 'block';
   document.getElementById('quiz-results').style.display = 'none';
   document.getElementById('score-live').textContent = 'Score: 0';
